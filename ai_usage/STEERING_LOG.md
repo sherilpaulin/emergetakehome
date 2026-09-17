@@ -97,3 +97,11 @@ Interactive moments in this session where the user corrected, pushed back on, ma
 - **What you said:** N/A -- self-caught while re-reading the entry I'd just written and recognizing the same gap.
 - **Why:** CLAUDE.md hard rule 4, again: a number isn't done until the script that produced it lives in `analysis/` and reruns from scratch.
 - **What changed:** Added `lesson3_stall_drilldown()` to `analysis/funnel_dropoff.py`, ran it, confirmed identical numbers (216 stalled, 79.14 vs 79.75 quiz mean, 22.7% vs 34.2% group chat, etc.). Fixed I-011's source citation and moved it after I-010 in `INSIGHTS.md` (it had been inserted out of numeric order).
+
+## S-013
+- **Phase:** Phase 10
+- **Type:** explain-request
+- **What I did:** Asked to explain why the I-014 support-signal gaps (coach calls, study hall, group chat) can't be read as causal, and what else could explain the difference.
+- **What you said:** "explain why we can't say it causes finishing. What could be another reason for the difference?"
+- **Why:** Standard due diligence before treating a correlational finding as a lever for the community plan -- matches CLAUDE.md rule 7.
+- **What changed:** Rather than only listing hypotheticals, tested the strongest one (tenure/opportunity confound) directly: added `tenure_adjusted_support_rates()` to `analysis/finish_vs_stop_comparison.py`. Result actually reversed I-014's raw-count finding for coach calls and study hall (both cumulative counts) once corrected for time-in-program -- stopped students used them at a *higher* rate per month, not lower. `joined_group_chat` (a one-time decision, not cumulative) survived the test. Added I-017 to `INSIGHTS.md` documenting the reversal and pointed I-014 forward to it rather than silently leaving a superseded framing standing.

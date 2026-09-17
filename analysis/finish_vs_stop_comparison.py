@@ -57,8 +57,36 @@ def compare_numeric(passed, stopped, col):
     print(f"  stopped: n={len(s):,}  mean={s.mean():.2f}  median={s.median():.2f}")
 
 
+def tenure_adjusted_support_rates(t):
+    """Coach calls and study hall are CUMULATIVE counts -- a student who
+    stayed in the program longer has more chances to rack them up
+    regardless of whether either one helps. Tests that confound by
+    excluding never-started students and comparing rate-per-month-in-
+    program, not raw totals."""
+    passed = t[t["status"] == "permit_passed"].copy()
+    stopped_started = t[
+        ~t["status"].isin(["permit_passed", "permit_failed", "withdrawn", "not_started"])
+    ].copy()
+
+    for label, grp in (("passed", passed), ("stopped (excl. never-started)", stopped_started)):
+        months = grp["days_in_program"] / 30
+        print(f"-- {label} (n={len(grp):,}) --")
+        print(f"  days_in_program: mean={grp['days_in_program'].mean():.1f} "
+              f"median={grp['days_in_program'].median():.1f}")
+        print(f"  coach_calls_completed: raw mean={grp['coach_calls_completed'].mean():.2f}  "
+              f"per-month mean={(grp['coach_calls_completed'] / months).mean():.3f}")
+        print(f"  study_hall_sessions_attended: raw mean={grp['study_hall_sessions_attended'].mean():.2f}  "
+              f"per-month mean={(grp['study_hall_sessions_attended'] / months).mean():.3f}")
+        print(f"  joined_group_chat: {100 * (grp['joined_group_chat'] == 'yes').mean():.1f}% "
+              f"(not a cumulative count -- tenure shouldn't affect this one)")
+        print()
+
+
 def main():
     t = load()
+    t["days_in_program"] = (
+        pd.Timestamp("2026-09-15 06:00:00") - pd.to_datetime(t["signup_at"])
+    ).dt.total_seconds() / 86400
     passed = t[t["status"] == "permit_passed"]
     stopped = t[~t["status"].isin(["permit_passed", "permit_failed", "withdrawn"])]
     excluded = t[t["status"].isin(["permit_failed", "withdrawn"])]
@@ -82,6 +110,11 @@ def main():
     for col in NUMERIC_FIELDS:
         compare_numeric(passed, stopped, col)
         print()
+
+    print("=" * 70)
+    print("TENURE CONFOUND CHECK: is the support gap just 'more time in program'?")
+    print("=" * 70)
+    tenure_adjusted_support_rates(t)
 
 
 if __name__ == "__main__":

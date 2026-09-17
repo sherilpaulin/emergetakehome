@@ -236,3 +236,11 @@ lets add to insights for now.  Using student_table.csv, compare students who fin
 ```
 lets define stopped as any step prior to permit received. for this analysis, lets filter out status = permit failed or withdrawn as those are end points. I want to compare permit passed against the other status (minus the two i mentioned)
 ```
+
+## P-029
+- **Phase:** not specified
+- **Time:** 2026-09-17 05:00:09
+- **Prompt:**
+```
+Lets look at coach-calls/study-hall/group-chat "support" story. explain why we can't say it causes finishing. What could be another reason for the difference?
+```
