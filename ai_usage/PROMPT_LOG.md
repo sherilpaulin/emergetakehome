@@ -35,7 +35,7 @@ Phase 4: Data notes. Create analysis/DATA_NOTES.md and a skill in .claude/skills
 ```
 
 ## P-005
-- **Phase:** not specified
+- **Phase:** Phase 4
 - **Time:** 2026-09-17 02:47:41
 - **Prompt:**
 ```
@@ -43,7 +43,7 @@ create the data_notes.md but do not add any entries yet
 ```
 
 ## P-006
-- **Phase:** not specified
+- **Phase:** Phase 4
 - **Time:** 2026-09-17 02:48:29
 - **Prompt:**
 ```
@@ -75,7 +75,7 @@ Phase 7: Data Cleaning. Write analysis/clean_data.py that applies the choices we
 ```
 
 ## P-010
-- **Phase:** not specified
+- **Phase:** Phase 7
 - **Time:** 2026-09-17 03:19:00
 - **Prompt:**
 ```
@@ -83,7 +83,7 @@ Show me the exact code and the result for counting test accounts and the removal
 ```
 
 ## P-011
-- **Phase:** not specified
+- **Phase:** Phase 7
 - **Time:** 2026-09-17 03:20:14
 - **Prompt:**
 ```
@@ -91,7 +91,7 @@ Try again
 ```
 
 ## P-012
-- **Phase:** not specified
+- **Phase:** Phase 7
 - **Time:** 2026-09-17 03:33:10
 - **Prompt:**
 ```
@@ -99,7 +99,7 @@ continuing on the data cleaning phase 7, Now build two tables from the cleaned f
 ```
 
 ## P-013
-- **Phase:** not specified
+- **Phase:** Phase 7
 - **Time:** 2026-09-17 03:46:04
 - **Prompt:**
 ```
@@ -127,7 +127,7 @@ Show me the list of tests and wait for my OK.
 ```
 
 ## P-015
-- **Phase:** not specified
+- **Phase:** Phase 8
 - **Time:** 2026-09-17 04:06:00
 - **Prompt:**
 ```
@@ -150,7 +150,7 @@ Phase 9: Funnel analysis. Using analysis/clean/student_table.csv and the funnel 
 ```
 
 ## P-017
-- **Phase:** not specified
+- **Phase:** Phase 9
 - **Time:** 2026-09-17 04:14:28
 - **Prompt:**
 ```
@@ -158,7 +158,7 @@ I agree with having per-step cutoffs. What are the pros / cons of using a generi
 ```
 
 ## P-018
-- **Phase:** not specified
+- **Phase:** Phase 9
 - **Time:** 2026-09-17 04:16:22
 - **Prompt:**
 ```
@@ -166,7 +166,7 @@ what would the funnel look like with p90 calculated cutoffs
 ```
 
 ## P-019
-- **Phase:** not specified
+- **Phase:** Phase 9
 - **Time:** 2026-09-17 04:18:45
 - **Prompt:**
 ```
@@ -174,7 +174,7 @@ can you provide the mean, median, range, p90, p95 for each funnel step
 ```
 
 ## P-020
-- **Phase:** not specified
+- **Phase:** Phase 9
 - **Time:** 2026-09-17 04:25:08
 - **Prompt:**
 ```
@@ -182,7 +182,7 @@ pros and cons of using mean or median as cutoff rather than p90
 ```
 
 ## P-021
-- **Phase:** not specified
+- **Phase:** Phase 9
 - **Time:** 2026-09-17 04:27:24
 - **Prompt:**
 ```
@@ -190,7 +190,7 @@ lets use p90 as the funnel as part of the analysis. please create a new file in 
 ```
 
 ## P-023
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 04:31:50
 - **Prompt:**
 ```
@@ -198,7 +198,7 @@ ignore the last prompt (phase 10: cutoff points) and remove it from the prompt l
 ```
 
 ## P-024
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 04:36:06
 - **Prompt:**
 ```
@@ -206,7 +206,7 @@ lets drill into the lesson three stall point first
 ```
 
 ## P-025
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 04:38:45
 - **Prompt:**
 ```
@@ -214,7 +214,7 @@ how long do students usually take between lessons, and if a student takes a long
 ```
 
 ## P-026
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 04:45:46
 - **Prompt:**
 ```
@@ -222,7 +222,7 @@ can we look into the "status" of these students. should there be a prioritizatio
 ```
 
 ## P-027
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 04:49:48
 - **Prompt:**
 ```
@@ -230,7 +230,7 @@ lets add to insights for now.  Using student_table.csv, compare students who fin
 ```
 
 ## P-028
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 04:55:49
 - **Prompt:**
 ```
@@ -238,7 +238,7 @@ lets define stopped as any step prior to permit received. for this analysis, let
 ```
 
 ## P-029
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 05:00:09
 - **Prompt:**
 ```
@@ -246,7 +246,7 @@ Lets look at coach-calls/study-hall/group-chat "support" story. explain why we c
 ```
 
 ## P-030
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 05:03:32
 - **Prompt:**
 ```
@@ -254,7 +254,7 @@ please provide where / how you got the numerators and denominators for the contr
 ```
 
 ## P-031
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 05:06:43
 - **Prompt:**
 ```
@@ -262,7 +262,7 @@ the exclusions should only be permit_passed, permit_failed, withdrawn; not start
 ```
 
 ## P-032
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 05:12:08
 - **Prompt:**
 ```
@@ -270,7 +270,7 @@ passed means status = permit_passed; stopped means status is either not_started,
 ```
 
 ## P-033
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 05:15:30
 - **Prompt:**
 ```
@@ -278,7 +278,7 @@ lets take a look at withdrawn, permit failed, and not started. any trends to not
 ```
 
 ## P-034
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 05:20:28
 - **Prompt:**
 ```
@@ -286,7 +286,7 @@ can you provide a breakdown by referral sources, are some of them not as effecti
 ```
 
 ## P-035
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 05:23:29
 - **Prompt:**
 ```
@@ -294,7 +294,7 @@ what are some reasons for the observations in paid_social, reentry_org, and work
 ```
 
 ## P-036
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 05:27:17
 - **Prompt:**
 ```
@@ -302,7 +302,7 @@ yes please add the two questions. next lets look at boston. using fields availab
 ```
 
 ## P-037
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 05:29:39
 - **Prompt:**
 ```
@@ -310,7 +310,7 @@ Referral-source mix within Boston
 ```
 
 ## P-038
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 05:31:59
 - **Prompt:**
 ```
@@ -318,7 +318,7 @@ okay lets look at lesson details (what module), lesson performance, and support 
 ```
 
 ## P-039
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 05:34:56
 - **Prompt:**
 ```
@@ -326,7 +326,7 @@ can you run a similar analysis for sacramento and nyc
 ```
 
 ## P-040
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 05:37:19
 - **Prompt:**
 ```
@@ -334,7 +334,7 @@ Do you have suggestions for any other analyses, deep dives, segmentations etc. t
 ```
 
 ## P-041
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 05:39:00
 - **Prompt:**
 ```
@@ -342,7 +342,7 @@ start with three segment analysis
 ```
 
 ## P-042
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 05:41:27
 - **Prompt:**
 ```
@@ -350,7 +350,7 @@ let's run behavior over content next
 ```
 
 ## P-043
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 05:45:21
 - **Prompt:**
 ```
@@ -358,7 +358,7 @@ please edit the group chat + study hall finding to reflect that more motivated s
 ```
 
 ## P-044
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 05:47:27
 - **Prompt:**
 ```
@@ -366,7 +366,7 @@ lets do both
 ```
 
 ## P-045
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 05:53:01
 - **Prompt:**
 ```
@@ -374,7 +374,7 @@ From the insights we have gathered so far, please write a short summary in INSIG
 ```
 
 ## P-046
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 05:56:00
 - **Prompt:**
 ```
@@ -382,9 +382,17 @@ Please also add keeping up with study plans insight (maybe pattern), transport t
 ```
 
 ## P-047
-- **Phase:** not specified
+- **Phase:** Phase 10: Deep-Dive Analysis
 - **Time:** 2026-09-17 05:59:25
 - **Prompt:**
 ```
 Log check: compare the work we have done so far with PROMPT_LOG.md with STEERING_LOG.md. List any correction, pushback, decision, or answered question that isn't logged in steering log, and ALL prompts submitted so far into PROMPT_LOG.md. The phase to include in prompt log will always be the last referenced "Phase: N". Please show me the updates before making them
+```
+
+## P-048
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 06:05:38
+- **Prompt:**
+```
+lets call P-023 to P-047 as phase 10: Deep-Dive Analysis; full backfill
 ```

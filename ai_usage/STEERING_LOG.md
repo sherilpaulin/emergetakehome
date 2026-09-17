@@ -121,3 +121,111 @@ Interactive moments in this session where the user corrected, pushed back on, ma
 - **What you said:** "please edit the group chat + study hall finding to reflect that more motivated students might be pursuing those options and causing some skew in the data."
 - **Why:** The mechanical gating fact (chat -> study hall visibility) explains *why* study hall requires chat, but doesn't by itself explain *why* study hall attendance predicts passing -- self-selected motivation is the more likely driver, and I'd underweighted it.
 - **What changed:** Added an explicit paragraph to I-029 in `INSIGHTS.md` naming the motivation-confound directly, cross-referencing I-027 (plan adherence) as the same underlying story from a different angle, and stating plainly: don't read this as "assign more study hall and the rate goes up."
+
+## S-016
+- **Phase:** Phase 4
+- **Type:** decision
+- **Backfilled:** yes, added during the P-047/P-048 log audit -- not logged at the time.
+- **What I did:** Presented example entries for all four `DATA_NOTES.md` parts (Problems found, Row counts, Assumptions, Questions for Emerge) and asked whether to build the real file and skill now.
+- **What you said (P-005):** "create the data_notes.md but do not add any entries yet"
+- **Why:** Not restated -- wanted the file skeleton in place without committing to the specific example content shown.
+- **What changed:** Created `analysis/DATA_NOTES.md` with the four section headers and empty tables only -- no D-### rows, no assumptions, no questions. Held off building the skill until the next prompt.
+
+## S-017
+- **Phase:** Phase 4
+- **Type:** answered-question
+- **Backfilled:** yes, added during the P-047/P-048 log audit.
+- **What I did:** After creating the empty `DATA_NOTES.md` skeleton, asked "Skill for `.claude/skills/data-notes/` still not built -- want that now too, or hold?"
+- **What you said (P-006):** "yes create the data-notes skill as well"
+- **Why:** Not restated.
+- **What changed:** Created `.claude/skills/data-notes/SKILL.md` documenting the D-### ID scheme and how to fill in each of the four `DATA_NOTES.md` sections.
+
+## S-018
+- **Phase:** Phase 7
+- **Type:** pushback
+- **Backfilled:** yes, added during the P-047/P-048 log audit.
+- **What I did:** In response to P-010 ("show me the exact code and result for counting test accounts"), ran a Bash command showing the exact regex and its output (9 rows removed).
+- **What you said (P-011):** "Try again"
+- **Why:** Not stated. Being honest: I don't have clear visibility into what was insufficient about the first attempt, and I'm not inventing a reason I don't actually know.
+- **What changed:** Re-ran the same verification (exact code plus a live result: 3,009 -> 3,000, the 9 `test_*` ids listed) and presented it again. No code or number differed between the two attempts.
+
+## S-019
+- **Phase:** Phase 7
+- **Type:** decision
+- **Backfilled:** yes, added during the P-047/P-048 log audit -- only the rewatch_ratio piece of this same answer batch was logged at the time (S-008).
+- **What I did:** Asked 4 clarifying questions via `AskUserQuestion` before building `student_table.csv`: what "stopped lesson/module" means, how to represent aggregate metrics for 0-lesson students, what anchor to use for "lessons in the first 7 days," and which extra metrics to add.
+- **What you said (P-012 answers):** "Last lesson/module they completed" (not the next one); "Blank/empty" for 0-lesson students; `signup_at` as the 7-day anchor. (The fourth answer, the `rewatch_ratio` definition correction, is S-008.)
+- **Why:** Not restated beyond picking the recommended option for the first three -- each was a definitional ambiguity that needed a call before building the table.
+- **What changed:** `build_student_table.py` implements all three: `stopped_lesson_title`/`stopped_module` use the highest completed lesson; aggregate metrics stay blank (not 0) for 0-lesson students; `lessons_first_7_days` counts `completed_at <= signup_at + 7 days`.
+
+## S-020
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Type:** answered-question
+- **Backfilled:** yes, added during the P-047/P-048 log audit.
+- **What I did:** After the FV->CC and CC->Permit drill-down (`funnel_dropoff.py`), asked "Want me to size those two segments precisely next, or keep drilling into the lesson-3 stall point first?"
+- **What you said (P-024):** "lets drill into the lesson three stall point first"
+- **Why:** Not restated.
+- **What changed:** Built the lesson-3-specific drilldown (I-011) instead of sizing the two re-engagement segments (I-009/I-010) first.
+
+## S-021
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Type:** answered-question
+- **Backfilled:** yes, added during the P-047/P-048 log audit.
+- **What I did:** After the status-prioritization drilldown, asked "Want this added to `INSIGHTS.md` as-is, or drill into P1's 61 students individually first?"
+- **What you said (P-027):** "lets add to insights for now" (then pivoted to a new field-comparison request in the same message).
+- **Why:** Not restated.
+- **What changed:** Added I-013 to `INSIGHTS.md` as-is rather than first drilling into the 61 P1 students individually.
+
+## S-022
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Type:** decision
+- **Backfilled:** yes, added during the P-047/P-048 log audit.
+- **What I did:** Presented a menu of ~17 candidate fields to compare between "students who finished" and "students who stopped," without yet defining those two groups precisely.
+- **What you said (P-028):** "lets define stopped as any step prior to permit received. for this analysis, lets filter out status = permit failed or withdrawn as those are end points. I want to compare permit passed against the other status (minus the two i mentioned)"
+- **Why:** Not restated -- a definitional choice needed before running any comparison.
+- **What changed:** Defined `passed` = `permit_passed`, `stopped` = every other status except `permit_failed`/`withdrawn`, and built `finish_vs_stop_comparison.py` around that split (later refined in S-014).
+
+## S-023
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Type:** decision
+- **Backfilled:** yes, added during the P-047/P-048 log audit -- handled by adding a `DATA_NOTES.md` assumption at the time, but never logged here.
+- **What I did:** Had already been using the passed/stopped/end definition from S-022 in `finish_vs_stop_comparison.py`, without it being written down in `DATA_NOTES.md`.
+- **What you said (P-032):** "passed means status = permit_passed; stopped means status is either not_started, inactive, course_complete, permit_scheduled, or in_progress; end means status = withdrawn or permit failed;"
+- **Why:** Not restated -- reads as a request to formalize/confirm the definition already in use.
+- **What changed:** Confirmed the code already matched exactly (no code change needed) and added the definition as a formal Assumption in `analysis/DATA_NOTES.md`, alongside the other methodology assumptions.
+
+## S-024
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Type:** answered-question
+- **Backfilled:** yes, added during the P-047/P-048 log audit.
+- **What I did:** After testing 4 hypotheses for the referral-source funnel gaps (`paid_social`, `reentry_org`, `workforce_center`), ended with "Two of these three 'can't test' gaps are good, concrete additions to the Questions for Emerge list -- want me to add them to `DATA_NOTES.md`?"
+- **What you said (P-036):** "yes please add the two questions." (then pivoted to a new Boston request in the same message).
+- **Why:** Not restated.
+- **What changed:** Added the `paid_social` ad-targeting question and the `workforce_center` case-management question to `DATA_NOTES.md`'s Questions for Emerge section.
+
+## S-025
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Type:** decision
+- **Backfilled:** yes, added during the P-047/P-048 log audit.
+- **What I did:** Presented a table of 8 suggested Boston drill-down angles (referral-source mix, `stopped_module`, lesson performance, support signals, demographics, signup timing, transport, sample-size check) and asked which to run.
+- **What you said (P-037):** "Referral-source mix within Boston"
+- **Why:** Not restated.
+- **What changed:** Built the Boston referral-source composition decomposition (I-022) instead of any of the other 7 suggested angles.
+
+## S-026
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Type:** decision
+- **Backfilled:** yes, added during the P-047/P-048 log audit.
+- **What I did:** Presented a grouped menu of further analyses (segments not yet funnel-broken, behavior-over-content, time/cohort trends, prioritization extensions) and asked which to run.
+- **What you said (P-041):** "start with three segment analysis"
+- **Why:** Not restated -- picked the first category (age band, device, transport-by-city) over the other three.
+- **What changed:** Built the age-band/device/transport-by-city funnel breakdowns (I-025/I-026) before any of the other suggested categories.
+
+## S-027
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Type:** decision
+- **Backfilled:** yes, added during the P-047/P-048 log audit.
+- **What I did:** After the 3-segment analysis, the menu from S-026 still had 3 unrun categories (behavior-over-content, cohort trends, prioritization extensions). Asked which was next.
+- **What you said:** P-042: "let's run behavior over content next"; P-044 (after the exam-lead-time detour in P-043): "lets do both" (cohort trend + prioritization extensions, the two remaining categories).
+- **Why:** Not restated.
+- **What changed:** Ran behavior-over-content (I-027/I-028/I-029) first, then both remaining categories together (I-031/I-032/I-033), completing the full original menu from the suggestions turn.
