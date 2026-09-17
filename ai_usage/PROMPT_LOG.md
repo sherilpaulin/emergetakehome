@@ -220,3 +220,11 @@ how long do students usually take between lessons, and if a student takes a long
 ```
 can we look into the "status" of these students. should there be a prioritization for example for the "inactive" students who are so close to finishing?
 ```
+
+## P-027
+- **Phase:** not specified
+- **Time:** 2026-09-17 04:49:48
+- **Prompt:**
+```
+lets add to insights for now.  Using student_table.csv, compare students who finished the course with students who stopped. List the fields we could compare (things like training plan, group chat, study hall, coach calls, device, language, age, city, how fast they started, the new metrics like rewatch ratio that was calculated in students_table). For each one, tell me in one line why it might matter and i'll choose which ones to dive deeper on.
+```
