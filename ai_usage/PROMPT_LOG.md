@@ -260,3 +260,11 @@ please provide where / how you got the numerators and denominators for the contr
 ```
 the exclusions should only be permit_passed, permit_failed, withdrawn; not started stays as part of the "stopped" funnel
 ```
+
+## P-032
+- **Phase:** not specified
+- **Time:** 2026-09-17 05:12:08
+- **Prompt:**
+```
+passed means status = permit_passed; stopped means status is either not_started, inactive, course_complete, permit_scheduled, or in_progress; end means status = withdrawn or permit failed;
+```
