@@ -7,15 +7,20 @@ Snapshot: 2026-09-15 06:00 ET. Everything below is computed from `data/`, not gu
 | ID | File | What's wrong | Rows | What we did |
 |---|---|---|---|---|
 | D-001 | students.csv | `user_id` doesn't match the `u_######` pattern every real row uses (`test_01`...`test_09`); all 9 also have `referral_source = internal`, not a documented value. | 9 | Excluded from CA and every funnel count (decision confirmed with user). `data/` itself untouched. |
-| D-002 | students.csv vs lesson_events.csv | `lessons_completed` (summary field) is higher than the highest `lesson_number` actually logged in `lesson_events.csv`, in every case (never lower). | 19 | Per CLAUDE.md's existing rule, trust `lesson_events.csv`: use its max `lesson_number` for `lessons_completed`/Course Complete status everywhere. `students.csv` untouched, mismatch logged here. |
-| D-003 | students.csv vs seats_by_city.csv | `city` has 7 raw spellings instead of the 3 canonical ones in `seats_by_city.csv` (`NYC`, `Sacramento`, `Boston`): `New York` (14), `nyc` (13), `NYC ` with a trailing space (10), `BOS` (6). | 43 | Normalized to the 3 canonical spellings for analysis (`New York`/`nyc`/`NYC ` → `NYC`, `BOS` → `Boston`). `data/` untouched; mapping applied only in `analysis/`. |
-| D-004 | students.csv | `engagement_3d_minutes > engagement_7d_minutes` -- DATA_DICTIONARY.md says 3d "should never exceed" 7d. | 11 | Use `engagement_7d_minutes` instead of `engagement_3d_minutes` for all 11 rows where they disagree. `data/` untouched. See Assumptions and Questions for Emerge below. |
+| D-002 | students.csv vs lesson_events.csv | `lessons_completed` (summary field) is higher than the highest `lesson_number` actually logged in `lesson_events.csv`, in every case (never lower). | 19 (5 overlap with D-001 test accounts, already excluded; 14 remain among real students) | Per CLAUDE.md's existing rule, trust `lesson_events.csv`: `analysis/clean_data.py` overwrites `lessons_completed` with the event-log max (original kept as `lessons_completed_raw`), and adds `first_video_clean`/`course_complete_clean` flags from the same source. `data/` untouched. |
+| D-003 | students.csv vs seats_by_city.csv | `city` has 7 raw spellings instead of the 3 canonical ones in `seats_by_city.csv` (`NYC`, `Sacramento`, `Boston`): `New York` (14), `nyc` (13), `NYC ` with a trailing space (10), `BOS` (6). | 43 | `analysis/clean_data.py` normalizes to the 3 canonical spellings (`New York`/`nyc`/`NYC ` → `NYC`, `BOS` → `Boston`); original kept as `city_raw`. `data/` untouched. |
+| D-004 | students.csv | `engagement_3d_minutes > engagement_7d_minutes` -- DATA_DICTIONARY.md says 3d "should never exceed" 7d. | 11 | `analysis/clean_data.py` adds an `engagement_3d_unreliable` flag for these 11 rows; use `engagement_7d_minutes` instead wherever it's set. `data/` untouched. See Assumptions and Questions for Emerge below. |
 
 ## 2. Row counts
 
+Produced by `analysis/clean_data.py`, writing to `analysis/clean/` (`data/` untouched).
+
 | File | Rows before cleaning | Rows after cleaning | Note |
 |---|---|---|---|
-| students.csv | 3,009 | 3,000 | 9 test/internal accounts (D-001) excluded from the analysis population. |
+| students.csv | 3,009 | 3,000 | 9 test/internal accounts (D-001) excluded. |
+| lesson_events.csv | 20,383 | 20,383 | Unchanged -- the 9 D-001 accounts had 0 event rows to begin with. |
+| lessons.csv | 21 | 21 | Unchanged -- no problems found. |
+| seats_by_city.csv | 3 | 3 | Unchanged -- no problems found. |
 
 ## 3. Assumptions
 

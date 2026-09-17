@@ -65,3 +65,11 @@ Phase 5: Data exploration. Write analysis/data_explore.py. For each data file, i
 ```
 Phase 6: Data Issues. Using the data dictionary and CLAUDE.md, previous analysis, check the data files for problems. Examples: engagement_3d > engagement_7d, test accounts, misspelled cities, fields that disagree with each other (like lessons_completed vs the lesson events), and anything the dictionary says "should never" happen. Also check seats_by_city.csv matches the cities in students.csv.  Write analysis/check_data.py. Don't fix anything yet. For each problem, show me: what it is, how many rows, a few example user_ids, and 2 options for handling it. Then go through them with me ONE AT A TIME and ask what I want to do, and as we go along, you will be logging these decisions.
 ```
+
+## P-009
+- **Phase:** Phase 7
+- **Time:** 2026-09-17 03:16:17
+- **Prompt:**
+```
+Phase 7: Data Cleaning. Write analysis/clean_data.py that applies the choices we made. Save cleaned copies of the four data files in analysis/clean/ (never change or edit data/). Record every problem, choice, and row count in DATA_NOTES.md if not done so already. Run the script and then show me DATA_NOTES.md.
+```
