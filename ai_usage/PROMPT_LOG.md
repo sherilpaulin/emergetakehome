@@ -125,3 +125,18 @@ Check these things:
 Tests should only read files, never change them. Add a one-line short but descriptive comment to each test detailing the purpose of the test.
 Show me the list of tests and wait for my OK.
 ```
+
+## P-015
+- **Phase:** not specified
+- **Time:** 2026-09-17 04:06:00
+- **Prompt:**
+```
+Run the 22 tests and tell me:
+1. How many passed, failed, and gave flags.
+2. For each failure: what went wrong, a few example user ids, and whether it's a data problem or a code bug.
+
+Don't fix anything yet. Go through failures with me one at a time with suggested paths forward.
+After I decide, fix code bugs and rerun, or add data problems to DATA_NOTES.md.
+Don't change a test just to make it pass.
+When done, save a short summary in analysis/tests/TEST_RESULTS.md.
+```
