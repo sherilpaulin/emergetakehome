@@ -97,3 +97,11 @@ Try again
 ```
 continuing on the data cleaning phase 7, Now build two tables from the cleaned files. Don't change the original cleaned files. 1. analysis/clean/student_table.csv: one row per student. Start from students and add columns from lesson_events: reached first video, finished course, highest lesson, # lessons done, last lesson date, days since last lesson (use the snapshot time as end time), lessons in the first 7 days, longest break, average quiz score, avg minutes watched, avg minutes expected to be watched based on lessons.csv video_minutes for the lessons they completed so far, and the lesson and module where they stopped, and any other metrics you think i should add. please suggest them before adding. If you have any questions on joins or think there are duplicate values being created, please ask me for path forward before making the student_table. 2. analysis/clean/lesson_table.csv: one row per finished lesson, with the lesson info from lessons.csv added. Then you should check: the student table has exactly one row per student, and its row count matches the cleaned students file. Show me 5 example rows and explain each new column in one line. Any data discrepancies, log it in DATA_NOTES.md.
 ```
+
+## P-013
+- **Phase:** not specified
+- **Time:** 2026-09-17 03:46:04
+- **Prompt:**
+```
+as part of data_noted.md, can you create a data dictionary for the newly created cleaned student_table and lesson_table. for any new metrics we define going forward, make sure to track in data_notes
+```

@@ -1,11 +1,11 @@
 ---
 name: data-notes
-description: Use when finding, documenting, or resolving a data-quality issue in this take-home (inconsistent values, duplicates, test rows, fields that disagree) -- fills in analysis/DATA_NOTES.md. Triggered by CLAUDE.md hard rule 6 ("flag data problems, don't silently fix them") and the "When unsure" rule. Also use when computing funnel/row counts that exclude any rows, or when a decision needs input only Emerge (Gabe) can give.
+description: Use when finding, documenting, or resolving a data-quality issue in this take-home (inconsistent values, duplicates, test rows, fields that disagree) -- fills in analysis/DATA_NOTES.md. Triggered by CLAUDE.md hard rule 6 ("flag data problems, don't silently fix them") and the "When unsure" rule. Also use when computing funnel/row counts that exclude any rows, when a decision needs input only Emerge (Gabe) can give, or when adding/renaming a column in any analysis/clean/*.csv table (student_table.csv, lesson_table.csv, or any later one).
 ---
 
 # Data Notes
 
-`analysis/DATA_NOTES.md` has four parts. Keep every number computed from
+`analysis/DATA_NOTES.md` has five parts. Keep every number computed from
 `data/` (CLAUDE.md hard rule 4) -- never estimate a count and write it
 down as if it were exact.
 
@@ -52,6 +52,22 @@ working assumption used everywhere else in the analysis (should usually
 match an entry in part 3). If Gabe answers one of these mid-session,
 update the assumption in part 3 and mark the question here as answered
 rather than deleting it.
+
+## 5. Data dictionary: cleaned tables
+
+One entry per column in every `analysis/clean/*.csv` table that isn't a
+straight, unrenamed pass-through from a `data/*.csv` file already
+covered by `data/DATA_DICTIONARY.md` (a plain copy of `title` from
+`lessons.csv` doesn't need a new entry; `lessons_completed` -- corrected
+from the event log -- does). **The moment a build script
+(`analysis/build_*.py`) adds or renames a column, add its row here in
+the same change** -- this section is a contract kept in lockstep with
+the code, not written up after the fact from memory.
+
+Group entries under a `### <file>.csv` heading, using a table: **Column
+| Definition**. Definition states what the column means, where it came
+from (which source column/table, and which `D-###` decision if it's a
+cleaning correction), and when it's blank if it can be.
 
 ## General
 
