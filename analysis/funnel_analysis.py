@@ -142,11 +142,24 @@ def print_adjusted_funnel(label, f):
           f"-- {f['Permit_excluded_too_new']:,} excluded as too new")
 
 
+OFFICIAL_CUTOFF_DAYS = {"fv": 7, "cc": 55, "permit": 78}  # p90 signup-to-stage, locked in Phase 9
+
+
 def main():
     t = load()
 
     print("=" * 70)
-    print("RAW FUNNEL (all signups, no recency adjustment)")
+    print(f"OFFICIAL FUNNEL -- p90 recency-adjusted (cutoffs: {OFFICIAL_CUTOFF_DAYS})")
+    print("Locked in as the funnel to use for reporting rates going forward.")
+    print("=" * 70)
+    print_adjusted_funnel("Overall", funnel_with_recency_cutoff(t, OFFICIAL_CUTOFF_DAYS))
+    print()
+    for city, g in t.groupby("city"):
+        print_adjusted_funnel(city, funnel_with_recency_cutoff(g, OFFICIAL_CUTOFF_DAYS))
+        print()
+
+    print("=" * 70)
+    print("FOR REFERENCE: raw funnel, no recency adjustment (understates CC/Permit)")
     print("=" * 70)
     print_funnel("Overall", funnel(t))
     print()
@@ -156,7 +169,7 @@ def main():
 
     print("=" * 70)
     print("TIME-TO-STAGE (90th percentile among students who reached it) -- ")
-    print("used to propose a fair recency cutoff, not yet applied")
+    print("basis for the official cutoffs above")
     print("=" * 70)
     p90 = time_to_stage_percentiles(t)
     for k, v in p90.items():
@@ -167,17 +180,7 @@ def main():
     for window in (7, 14, 30, 60, 90):
         print(f"  signed up within last {window} days: {(days_since_signup <= window).sum():,}")
 
-    cutoff_days = {"fv": 7, "cc": 55, "permit": 78}  # rounded p90s above
     print()
-    print("=" * 70)
-    print(f"ADJUSTED FUNNEL (per-step recency cutoffs: {cutoff_days})")
-    print("=" * 70)
-    print_adjusted_funnel("Overall", funnel_with_recency_cutoff(t, cutoff_days))
-    print()
-    for city, g in t.groupby("city"):
-        print_adjusted_funnel(city, funnel_with_recency_cutoff(g, cutoff_days))
-        print()
-
     print("=" * 70)
     print("STEP DURATIONS (elapsed time for each transition, among those who completed it)")
     print("=" * 70)

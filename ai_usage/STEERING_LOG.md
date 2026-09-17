@@ -73,3 +73,11 @@ Interactive moments in this session where the user corrected, pushed back on, ma
 - **What you said:** N/A -- self-caught before this reached you, while checking `git status` after your stop-hook nudge and noticing no new analysis file existed for numbers I'd already reported.
 - **Why:** CLAUDE.md hard rule 4: "If a number came from a script, the script lives in analysis/ and reruns from scratch." An ad-hoc shell command satisfies neither half of that.
 - **What changed:** Wrote `analysis/funnel_analysis.py`, ran it, and confirmed it reproduces the exact same numbers already given (CA 3,000 / FV 1,998 / CC 696 / Permit 274 overall, plus the 3-city breakdown and the 90th-percentile time-to-stage figures). No numbers changed, just given a reproducible source.
+
+## S-010
+- **Phase:** Phase 9
+- **Type:** decision
+- **What I did:** Walked through recency-cutoff options across several turns: proposed p90 signup-based cutoffs (7/55/78 days), compared generic-7-days vs. calculated cutoffs, showed the raw vs. p90-adjusted funnel side by side, gave step-duration distributions (mean/median/range/p90/p95), and compared mean/median/p90 as the cutoff basis.
+- **What you said:** "lets use p90 as the funnel as part of the analysis."
+- **Why:** p90 excludes only the slowest ~10% of legitimate finishers from each step's denominator; mean and especially median were rejected because a median cutoff by definition still counts roughly half of eventual finishers as "too early to judge," undermining the fairness goal.
+- **What changed:** `analysis/funnel_analysis.py`'s `main()` reordered so the p90-adjusted funnel prints first as "OFFICIAL FUNNEL," with the raw funnel demoted to a labeled reference section. `analysis/DATA_NOTES.md` Assumptions section records the decision and why mean/median were rejected.

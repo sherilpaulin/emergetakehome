@@ -180,3 +180,11 @@ can you provide the mean, median, range, p90, p95 for each funnel step
 ```
 pros and cons of using mean or median as cutoff rather than p90
 ```
+
+## P-021
+- **Phase:** not specified
+- **Time:** 2026-09-17 04:27:24
+- **Prompt:**
+```
+lets use p90 as the funnel as part of the analysis. please create a new file in analysis where we start to track insights from our various analyses. Then i will note the next analysis to conduct
+```
