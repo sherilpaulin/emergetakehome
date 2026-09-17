@@ -228,3 +228,11 @@ can we look into the "status" of these students. should there be a prioritizatio
 ```
 lets add to insights for now.  Using student_table.csv, compare students who finished the course with students who stopped. List the fields we could compare (things like training plan, group chat, study hall, coach calls, device, language, age, city, how fast they started, the new metrics like rewatch ratio that was calculated in students_table). For each one, tell me in one line why it might matter and i'll choose which ones to dive deeper on.
 ```
+
+## P-028
+- **Phase:** not specified
+- **Time:** 2026-09-17 04:55:49
+- **Prompt:**
+```
+lets define stopped as any step prior to permit received. for this analysis, lets filter out status = permit failed or withdrawn as those are end points. I want to compare permit passed against the other status (minus the two i mentioned)
+```
