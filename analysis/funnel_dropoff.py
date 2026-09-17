@@ -82,8 +82,48 @@ def cc_to_permit_dropoff(t):
     return not_passed
 
 
+def lesson3_stall_drilldown(t, lesson_table):
+    """Of the students who stall right after lesson 3 (the single most
+    common FV->CC stopping point, I-008), is lesson 3 itself the
+    problem -- or just where already-happening drop-off shows up?
+    Compares their lesson-3 performance and demographics against
+    students who continued past it."""
+    eligible = t[(days_since_signup(t) >= CUTOFF_DAYS["cc"]) & t["first_video_clean"]]
+    stalled = eligible[~eligible["course_complete_clean"]]
+    stalled_l3 = stalled[stalled["stopped_lesson_title"] == "Basic Control & Shifting"]
+    print(f"Students stalled right after lesson 3: {len(stalled_l3):,}")
+    print()
+
+    l3_events = lesson_table[lesson_table["lesson_number"] == 3].copy()
+    l3_events["rewatch_ratio"] = l3_events["minutes_watched"] / l3_events["video_minutes"]
+    continued_ids = set(lesson_table.loc[lesson_table["lesson_number"] >= 4, "user_id"])
+    stalled_ids = set(stalled_l3["user_id"])
+
+    l3_stalled = l3_events[l3_events["user_id"].isin(stalled_ids)]
+    l3_continued = l3_events[l3_events["user_id"].isin(continued_ids)]
+
+    print("Lesson 3 performance -- stalled-here vs. continued-past-it:")
+    for col in ("quiz_score_pct", "minutes_watched", "rewatch_ratio"):
+        print(f"  {col}: stalled mean={l3_stalled[col].mean():.2f} median={l3_stalled[col].median():.2f}"
+              f" | continued mean={l3_continued[col].mean():.2f} median={l3_continued[col].median():.2f}")
+    print()
+
+    print("Demographics -- stalled-at-3 vs. overall population (%):")
+    for col in ("city", "age_band", "primary_device", "referral_source", "has_training_plan", "joined_group_chat"):
+        stalled_pct = (stalled_l3[col].value_counts(normalize=True) * 100).round(1)
+        overall_pct = (t[col].value_counts(normalize=True) * 100).round(1)
+        print(f"  {col}: stalled={stalled_pct.to_dict()} | overall={overall_pct.to_dict()}")
+    print()
+
+    print(f"Days stuck since lesson 3: mean={stalled_l3['days_since_last_lesson'].mean():.1f} "
+          f"median={stalled_l3['days_since_last_lesson'].median():.1f} "
+          f"max={stalled_l3['days_since_last_lesson'].max():.1f}")
+    return stalled_l3
+
+
 def main():
     t = load()
+    lesson_table = pd.read_csv(os.path.join(CLEAN_DIR, "lesson_table.csv"))
 
     print("=" * 70)
     print("DRILL-DOWN 1: First Video -> Course Complete (biggest drop, I-002)")
@@ -95,6 +135,12 @@ def main():
     print("DRILL-DOWN 2: Course Complete -> Permit (biggest lag, I-006)")
     print("=" * 70)
     cc_to_permit_dropoff(t)
+
+    print()
+    print("=" * 70)
+    print("DRILL-DOWN 3: Lesson 3 stall point -- content or coincidence? (I-011)")
+    print("=" * 70)
+    lesson3_stall_drilldown(t, lesson_table)
 
 
 if __name__ == "__main__":

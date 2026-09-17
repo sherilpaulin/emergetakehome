@@ -89,3 +89,11 @@ Interactive moments in this session where the user corrected, pushed back on, ma
 - **What you said:** "ignore the last prompt (phase 10: cutoff points) and remove it from the prompt log... lets drill into steps that are taking longer or where we lose the most students" -- explicitly asked to redact the retracted prompt from `ai_usage/PROMPT_LOG.md`, not just move on from it.
 - **Why:** Not stated -- read as: redirect the analysis to build on the I-001..I-007 insights already logged (biggest funnel drop and slowest step) rather than jumping to a new, separately-scoped lesson-level cutoff analysis.
 - **What changed:** Deleted the `## P-022` entry from `PROMPT_LOG.md` (the numbering now jumps P-021 -> P-023, intentionally, documented here). No file from the retracted Phase 10 request was created. Proceeding instead with a drill-down into the funnel steps already identified as slow/lossy (I-002 FV->CC drop, I-006 CC->Permit lag).
+
+## S-012
+- **Phase:** Phase 10
+- **Type:** correction (mine -- caught and fixed immediately, not user-driven)
+- **What I did:** Answered the lesson-3 stall drill-down (I-011) with an ad-hoc `python3 -c` computation, then wrote `INSIGHTS.md`'s I-011 entry citing its source as "not yet saved to a script" -- the exact same mistake as S-009.
+- **What you said:** N/A -- self-caught while re-reading the entry I'd just written and recognizing the same gap.
+- **Why:** CLAUDE.md hard rule 4, again: a number isn't done until the script that produced it lives in `analysis/` and reruns from scratch.
+- **What changed:** Added `lesson3_stall_drilldown()` to `analysis/funnel_dropoff.py`, ran it, confirmed identical numbers (216 stalled, 79.14 vs 79.75 quiz mean, 22.7% vs 34.2% group chat, etc.). Fixed I-011's source citation and moved it after I-010 in `INSIGHTS.md` (it had been inserted out of numeric order).

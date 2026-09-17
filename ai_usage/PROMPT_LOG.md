@@ -196,3 +196,11 @@ lets use p90 as the funnel as part of the analysis. please create a new file in 
 ```
 ignore the last prompt (phase 10: cutoff points) and remove it from the prompt log. Now we will drill down into the funnel analysis, based on your initial insights, lets drill into steps that are taking longer or where we lose the most students
 ```
+
+## P-024
+- **Phase:** not specified
+- **Time:** 2026-09-17 04:36:06
+- **Prompt:**
+```
+lets drill into the lesson three stall point first
+```
