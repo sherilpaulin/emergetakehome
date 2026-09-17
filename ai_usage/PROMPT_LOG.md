@@ -172,3 +172,11 @@ what would the funnel look like with p90 calculated cutoffs
 ```
 can you provide the mean, median, range, p90, p95 for each funnel step
 ```
+
+## P-020
+- **Phase:** not specified
+- **Time:** 2026-09-17 04:25:08
+- **Prompt:**
+```
+pros and cons of using mean or median as cutoff rather than p90
+```
