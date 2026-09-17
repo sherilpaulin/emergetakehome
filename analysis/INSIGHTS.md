@@ -108,7 +108,13 @@ Across all 21 lessons, avg quiz score ranges 79.05-79.79 (a 0.74-point spread) a
 
 ## I-029: Group chat is the gate, not the lever -- study hall is what actually correlates with success (reframes I-011/I-014/I-017)
 
-Joining group chat without attending study hall barely moves the needle: 10.0% end-to-end (321 eligible) vs. 9.0% for neither (1,229 eligible) -- almost no difference. Attending study hall (which requires group chat membership -- study hall is only announced there, confirmed with 0 students in "study hall only, no chat") lifts the rate to 27.9% (333 eligible). Every earlier insight crediting "group chat" as the support signal (I-011, I-014, I-017) should be read as really pointing at study hall attendance, with group chat as the necessary gateway rather than the active ingredient itself. **Source:** `analysis/behavior_analysis.py`.
+Joining group chat without attending study hall barely moves the needle: 10.0% end-to-end (321 eligible) vs. 9.0% for neither (1,229 eligible) -- almost no difference. Attending study hall (which requires group chat membership -- study hall is only announced there, confirmed with 0 students in "study hall only, no chat") lifts the rate to 27.9% (333 eligible). Every earlier insight crediting "group chat" as the support signal (I-011, I-014, I-017) should be read as really pointing at study hall attendance, with group chat as the necessary gateway rather than the active ingredient itself.
+
+**Correlational flag (CLAUDE.md rule 7), stated plainly:** both joining group chat and attending study hall are things a student actively chooses to do, repeatedly. The most likely explanation isn't "study hall teaches something coach calls and chat don't" -- it's that more motivated, more organized students are the ones who seek out and keep attending a live weekly session in the first place. Study hall attendance is plausibly a *symptom* of the same underlying motivation that also predicts finishing (see I-027's plan-adherence finding, which is the same story from a different angle), not an independent lever that would work if simply pushed onto less-motivated students. Don't read this as "assign more study hall and the rate goes up." **Source:** `analysis/behavior_analysis.py`.
+
+## I-030: Exam-scheduling lead time doesn't predict passing -- a clean null result
+
+Across all 326 students who took the exam, mean/median lead time (Course Complete to exam date) is nearly identical for passed (19.8/17.1 days) and failed (20.6/19.1 days). Pass rate by lead-time bucket bounces between 78.9% and 90.0% with no trend across 0-7d, 7-14d, 14-21d, 21-30d, 30-45d buckets. Booking sooner doesn't help, booking later doesn't hurt. Confirms and extends I-020 (which only looked at the failed group) to the full population who took the exam. **Source:** `analysis/exam_lead_time.py`.
 
 ## I-018: `not_started` students abandon within about a day of signing up, and `paid_social` leads are overrepresented
 

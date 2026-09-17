@@ -113,3 +113,11 @@ Interactive moments in this session where the user corrected, pushed back on, ma
 - **What you said:** "the exclusions should only be permit_passed, permit_failed, withdrawn; not started stays as part of the 'stopped' funnel."
 - **Why:** I made an implicit judgment call (excluding zero-activity `not_started` rows to make the comparison "cleaner") instead of using the population already agreed on -- that's mine to flag and ask about, not decide unilaterally.
 - **What changed:** Refactored `tenure_adjusted_support_rates()` to take `passed`/`stopped` as parameters from `main()` instead of deriving its own population, so there's exactly one definition of "stopped" used everywhere in the file. Reran: with `not_started` correctly included, the gap shrinks substantially (raw 2.5x/2.8x -> per-month ~1.1-1.2x) but does **not** reverse -- passed students still show a real, if smaller, edge, especially at the median (0.400 vs 0.000 coach calls/month). Rewrote I-017 in `INSIGHTS.md` to state this correctly, with a note explaining what was wrong in the first version rather than silently swapping the numbers.
+
+## S-015
+- **Phase:** Phase 10
+- **Type:** pushback
+- **What I did:** Wrote I-029 (group chat is the gate, study hall is the real signal) with a correlational flag, but framed it mainly around the mechanical group-chat/study-hall gating relationship (data dictionary: study hall only announced in chat) without spelling out the more important alternative explanation: motivated students self-select into repeated live attendance.
+- **What you said:** "please edit the group chat + study hall finding to reflect that more motivated students might be pursuing those options and causing some skew in the data."
+- **Why:** The mechanical gating fact (chat -> study hall visibility) explains *why* study hall requires chat, but doesn't by itself explain *why* study hall attendance predicts passing -- self-selected motivation is the more likely driver, and I'd underweighted it.
+- **What changed:** Added an explicit paragraph to I-029 in `INSIGHTS.md` naming the motivation-confound directly, cross-referencing I-027 (plan adherence) as the same underlying story from a different angle, and stating plainly: don't read this as "assign more study hall and the rate goes up."
