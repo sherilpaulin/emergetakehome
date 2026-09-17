@@ -46,6 +46,46 @@ def print_funnel(label, f):
     print(f"  Permit: {f['Permit']:,}  ({f['Permit_step_pct']:.1f}% of CC)")
 
 
+def step_duration_stats(series):
+    s = series.dropna()
+    return {
+        "n": len(s),
+        "mean": s.mean(),
+        "median": s.median(),
+        "min": s.min(),
+        "max": s.max(),
+        "p90": s.quantile(0.9),
+        "p95": s.quantile(0.95),
+    }
+
+
+def print_step_duration_stats(label, stats):
+    print(f"-- {label} (n={stats['n']:,}) --")
+    print(f"  mean:   {stats['mean']:.1f} days")
+    print(f"  median: {stats['median']:.1f} days")
+    print(f"  range:  {stats['min']:.1f} to {stats['max']:.1f} days")
+    print(f"  p90:    {stats['p90']:.1f} days")
+    print(f"  p95:    {stats['p95']:.1f} days")
+
+
+def funnel_step_durations(t):
+    """Per-step elapsed time (not cumulative from signup) for the 3
+    transitions: CA->FV, FV->CC, CC->Permit. Only among students who
+    actually completed that step (dropna handles the rest)."""
+    fv = t[t["first_video_clean"]]
+    cc = t[t["course_complete_clean"]]
+    passed = t[t["permit_result"] == "passed"].copy()
+    passed["permit_exam_date"] = pd.to_datetime(passed["permit_exam_date"])
+    passed["course_completed_at"] = pd.to_datetime(passed["course_completed_at"])
+    cc_to_permit = (passed["permit_exam_date"] - passed["course_completed_at"]).dt.total_seconds() / 86400
+
+    return {
+        "CA_to_FV": step_duration_stats(fv["signup_to_first_video_days"]),
+        "FV_to_CC": step_duration_stats(cc["first_video_to_course_complete_days"]),
+        "CC_to_Permit": step_duration_stats(cc_to_permit),
+    }
+
+
 def time_to_stage_percentiles(t):
     fv = t[t["first_video_clean"]]
     cc = t[t["course_complete_clean"]]
@@ -136,6 +176,13 @@ def main():
     print()
     for city, g in t.groupby("city"):
         print_adjusted_funnel(city, funnel_with_recency_cutoff(g, cutoff_days))
+        print()
+
+    print("=" * 70)
+    print("STEP DURATIONS (elapsed time for each transition, among those who completed it)")
+    print("=" * 70)
+    for step, stats in funnel_step_durations(t).items():
+        print_step_duration_stats(step, stats)
         print()
 
 

@@ -164,3 +164,11 @@ I agree with having per-step cutoffs. What are the pros / cons of using a generi
 ```
 what would the funnel look like with p90 calculated cutoffs
 ```
+
+## P-019
+- **Phase:** not specified
+- **Time:** 2026-09-17 04:18:45
+- **Prompt:**
+```
+can you provide the mean, median, range, p90, p95 for each funnel step
+```
