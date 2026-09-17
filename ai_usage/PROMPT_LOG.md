@@ -292,3 +292,11 @@ can you provide a breakdown by referral sources, are some of them not as effecti
 ```
 what are some reasons for the observations in paid_social, reentry_org, and workforce_center
 ```
+
+## P-036
+- **Phase:** not specified
+- **Time:** 2026-09-17 05:27:17
+- **Prompt:**
+```
+yes please add the two questions. next lets look at boston. using fields available in the cleaned datasets, can you list out the observations we have made so far, and suggestions for drill downs
+```
