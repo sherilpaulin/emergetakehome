@@ -372,3 +372,11 @@ lets do both
 ```
 From the insights we have gathered so far, please write a short summary in INSIGHTS.md, in 5-7 points. Each point has one sentence and the number or data point behind it. Mark which points are strong evidence and which are just patterns that could have other explanations. These should be actionable insights, that have the most likelihood of being incorporated into a community plan.
 ```
+
+## P-046
+- **Phase:** not specified
+- **Time:** 2026-09-17 05:56:00
+- **Prompt:**
+```
+Please also add keeping up with study plans insight (maybe pattern), transport to dmw, access to laptops / tablets, and study hall (maybe pattern)
+```
