@@ -2,6 +2,18 @@
 
 Running log of findings from the analyses in `analysis/`, in plain language, for use in `COMMUNITY_PLAN.md`. Every number here traces back to a script in `analysis/` -- see "Source." Correlational fields (group chat, study hall, training plan) get flagged as such per CLAUDE.md rule 7; nothing here claims cause without saying so.
 
+## Summary: top actionable insights
+
+Picked from the 33 insights below for evidence strength and how directly a community plan could act on them. **Strong evidence** = a direct count/measurement, not an inference about why. **Pattern** = a real, measured gap where the underlying cause could be something other than what's implied (usually self-selection/motivation) -- still worth acting on, but frame any intervention as a bet, not a guaranteed fix.
+
+1. **[Strong evidence]** Most students who stall despite having had time to finish quit in the first ~2 hours of the course, not gradually across it -- 742 of 880 stalled students (84.3%) stopped within lessons 1-4. (I-008)
+2. **[Strong evidence]** Most course-completers who haven't passed the permit never even booked the exam -- 257 of 302 (85.1%) never scheduled, vs. only 42 (13.9%) who took it and failed. (I-010)
+3. **[Strong evidence]** A failed exam attempt is usually a dead end, not a retry -- 41 of 52 permit-failed students (78.8%) never used their second allowed attempt. (I-020)
+4. **[Strong evidence]** Re-engagement has a hard deadline: no student in this dataset has ever returned from a break longer than 24 days, and 971 students are already past that point. (I-012)
+5. **[Pattern -- self-selection likely]** Hitting your own chosen week-1 pace target lines up with a much higher pass rate (35.9% vs. 7.2% for no plan at all), but this is as likely a marker of an already-motivated student as it is a lever that would work if pushed onto someone else. (I-027)
+6. **[Strong evidence the gap is real; cause unproven]** `paid_social` is the largest signup channel (515 eligible) and converts at roughly 60% the rate of every other channel (9.3% vs. 13.2-15.4%), consistently at every funnel step, not just one. (I-021)
+7. **[Pattern -- small city-level sample]** Boston's students get meaningfully less coaching than NYC or Sacramento (median 0 coach calls vs. 1 in both other cities), plausibly a staffing/capacity gap in the smallest market rather than a behavior difference. (I-023/I-024)
+
 ## I-001: Overall permit conversion is 9.1%
 
 274 of 3,000 signups hold a permit (raw funnel) -- matches the README's "roughly 1 in 10." **Source:** `analysis/funnel_analysis.py`.
