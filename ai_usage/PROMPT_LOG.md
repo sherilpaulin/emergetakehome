@@ -284,3 +284,11 @@ lets take a look at withdrawn, permit failed, and not started. any trends to not
 ```
 can you provide a breakdown by referral sources, are some of them not as effective  (maybe in terms of converting from login created to permit passed)
 ```
+
+## P-035
+- **Phase:** not specified
+- **Time:** 2026-09-17 05:23:29
+- **Prompt:**
+```
+what are some reasons for the observations in paid_social, reentry_org, and workforce_center
+```
