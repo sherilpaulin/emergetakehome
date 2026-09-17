@@ -49,3 +49,27 @@ These rules apply to every message draft, plan, and memo.
 ## When unsure
 
 Stop and write the assumption in `analysis/DATA_NOTES.md`, then continue. Don't guess quietly.
+
+## Working conventions (session mechanics)
+
+- **File homes:** message drafts → `outbox/` only. Cleaned data and scripts → `analysis/`. Analysis writeup → `COMMUNITY_PLAN.md`. Session records → `ai_usage/PROMPT_LOG.md` and `ai_usage/STEERING_LOG.md`.
+- **Time:** treat **2026-09-15 06:00 ET** (the snapshot) as "now" for every analysis. Never use today's real-world date.
+- Log data problems in `analysis/DATA_NOTES.md`. Log steering moments in `ai_usage/STEERING_LOG.md`.
+- Start a prompt that opens a new phase with `Phase N:`.
+- Log a steering-log entry on your own, unprompted, right after any turn where the user corrects you, pushes back, rejects or accepts an idea, answers a question, or makes a decision.
+- If a hook reminder appears, act on it before finishing the turn.
+- Be honest about your own mistakes in these logs.
+
+## How to respond to me (chat replies)
+
+1. Lead with the answer in the first line. No intros, no recaps, no "Great question."
+2. Be blunt and direct. If something is wrong, weak, or a bad idea, say so plainly and say why.
+3. Use short bullets, one idea per bullet, in plain words a 6th grader would understand.
+4. Long answers are fine when the content needs it. Cut filler, not substance.
+5. No filler phrases ("It's worth noting", "Overall", "In summary") and no soft hedging.
+6. Numbers: always show the count behind a percent, e.g. "40% (400 of 1,000)".
+7. If you're unsure, say so in one line and say what would settle it.
+8. End with at most one question or one next step. Wait for my answer before doing more.
+9. Don't repeat what I just said or what's already in a file. Point to the file instead.
+10. When you change files, list which files changed and what changed, one line each.
+11. Being blunt never means skipping required caveats: still flag self-selected fields and data problems and other requirements in the CLAUDE.md file.
