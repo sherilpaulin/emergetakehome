@@ -57,3 +57,11 @@ Interactive moments in this session where the user corrected, pushed back on, ma
 - **What you said:** Picked "treat 7d as reliable" (D-004 stays at 11 rows, unchanged), and separately asked to add a Questions for Emerge entry with a specific diagnostic: check whether `last_seen_at` being 3+ days stale while `engagement_3d_minutes > 0` points to a system tracking bug. Corrected me mid-plan when my first draft plan read as narrowing D-004 down to just the 3 matching rows -- clarified the 11-row problem and the 3-row evidence are not the same thing.
 - **Why:** If a student hasn't been seen in 3+ days, `engagement_3d_minutes` should be 0 by definition -- nonzero is only explainable by a tracking/pipeline bug, not normal variance.
 - **What changed:** Added a permanent diagnostic to `analysis/check_data.py` (alongside the existing D-004 check, not replacing it): of the 11 D-004 rows, 3 (`u_105733`, `u_100329`, `u_103191`) also have `last_seen_at` 3+ days stale -- a pattern found nowhere else in `students.csv`. `analysis/DATA_NOTES.md` updated: D-004 row (11, unchanged) in Problems found, a new Assumption (trust 7d for these 11), and a new Question for Emerge citing the 3-row evidence.
+
+## S-008
+- **Phase:** Phase 7
+- **Type:** correction (mine -- caught by the user, not self-caught)
+- **What I did:** Proposed `rewatch_ratio` as an extra `student_table.csv` metric, defined as the ratio of the student's two existing averages: `avg_minutes_watched ÷ avg_minutes_expected`.
+- **What you said:** "rewatch_ratio = minutes watched / video minutes, which then gets averaged across all completed lessons" -- i.e. compute the ratio per lesson first, then average the ratios, not average the two quantities first and then divide.
+- **Why:** These are not the same number in general (`mean(a/b) != mean(a)/mean(b)`) -- a student with one very short lesson watched at 3x length and one very long lesson watched exactly on time would show a skewed ratio-of-averages that a lesson-by-lesson average would not.
+- **What changed:** `analysis/build_student_table.py` computes `_ratio = minutes_watched / video_minutes` per row of `lesson_table.csv`, then takes `groupby("user_id")["_ratio"].mean()` -- average of ratios, per the corrected definition.

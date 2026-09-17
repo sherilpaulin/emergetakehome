@@ -25,6 +25,8 @@ Produced by `analysis/clean_data.py`, writing to `analysis/clean/` (`data/` unto
 ## 3. Assumptions
 
 - **Assumption:** for the 11 D-004 rows, `engagement_7d_minutes` is used instead of `engagement_3d_minutes` wherever they disagree. **Why:** the dictionary states 3d should never exceed 7d, so 3d is the broken field in these rows, not 7d.
+- **Assumption:** `student_table.csv`'s `lessons_first_7_days` uses a precise 7×24-hour window from `signup_at` (`completed_at <= signup_at + 7 days`), not calendar days. **Why:** the data dictionary doesn't define "first 7 days" precisely; a rolling window from the exact signup timestamp is the least ambiguous reading.
+- **Assumption:** in `student_table.csv`, aggregate metrics (`avg_quiz_score`, `avg_minutes_watched`, `avg_minutes_expected`, `rewatch_ratio`, `longest_break_days`, `last_lesson_date`, `days_since_last_lesson`) are blank for students with 0 lessons done, not 0. **Why:** 0 would misleadingly imply "scored/watched zero on an attempted lesson," not "never attempted." `longest_break_days` is also blank for students with exactly 1 lesson (a break needs two points to measure between).
 
 ## 4. Questions for Emerge
 
