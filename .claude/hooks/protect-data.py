@@ -31,7 +31,12 @@ import sys
 # any command that merely mentions the word "data/" (e.g. in a comment, an
 # unrelated directory of that name, or -- as caught during testing -- in this
 # hook's own test harness).
-REDIRECT_RE = re.compile(r">>?\s*(\S+)")
+# (?!&) excludes fd-duplication targets like `2>&1` / `>&2` -- `&1` is never
+# a filename, it's shell syntax for "same destination as fd 1". Missing this
+# caused a real false-positive: cwd happened to be data/ itself (a harmless,
+# allowed state -- read-only browsing of data/ is fine) and "&1" resolved as
+# a literal relative path under it.
+REDIRECT_RE = re.compile(r">>?\s*(?!&)(\S+)")
 
 
 def resolve(project_dir, cwd, path):

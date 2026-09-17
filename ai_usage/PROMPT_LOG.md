@@ -57,3 +57,11 @@ yes create the data-notes skill as well
 ```
 Phase 5: Data exploration. Write analysis/data_explore.py. For each data file, it should show: how many rows, the columns, how many blanks each column has, the different values in text columns, and the smallest and largest dates and numbers, any other unique features. Run it and then tell me in plain words: what looks normal, what looks strange, and what you want to check more closely. Don't fix anything yet or ask me to make decisions yet, as we will do that in the next step.
 ```
+
+## P-008
+- **Phase:** Phase 6
+- **Time:** 2026-09-17 02:58:19
+- **Prompt:**
+```
+Phase 6: Data Issues. Using the data dictionary and CLAUDE.md, previous analysis, check the data files for problems. Examples: engagement_3d > engagement_7d, test accounts, misspelled cities, fields that disagree with each other (like lessons_completed vs the lesson events), and anything the dictionary says "should never" happen. Also check seats_by_city.csv matches the cities in students.csv.  Write analysis/check_data.py. Don't fix anything yet. For each problem, show me: what it is, how many rows, a few example user_ids, and 2 options for handling it. Then go through them with me ONE AT A TIME and ask what I want to do, and as we go along, you will be logging these decisions.
+```
