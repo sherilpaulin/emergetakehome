@@ -41,3 +41,11 @@ Phase 4: Data notes. Create analysis/DATA_NOTES.md and a skill in .claude/skills
 ```
 create the data_notes.md but do not add any entries yet
 ```
+
+## P-006
+- **Phase:** not specified
+- **Time:** 2026-09-17 02:48:29
+- **Prompt:**
+```
+yes create the data-notes skill as well
+```
