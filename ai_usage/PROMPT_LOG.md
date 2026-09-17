@@ -148,3 +148,11 @@ When done, save a short summary in analysis/tests/TEST_RESULTS.md.
 ```
 Phase 9: Funnel analysis. Using analysis/clean/student_table.csv and the funnel definitions in CLAUDE.md, show me how many students reach each step: signed up → first video → finished course → passed permit. Show it for all students and for each city and for each step, show the count and the percent.  Note that you expect recent signups haven't had time to finish. Suggest a fair way to handle that, explain it simply, and wait for my OK before using it. Also note that this piece is focused on the funnel analysis and should not go beyond that scope yet
 ```
+
+## P-017
+- **Phase:** not specified
+- **Time:** 2026-09-17 04:14:28
+- **Prompt:**
+```
+I agree with having per-step cutoffs. What are the pros / cons of using a generic 7 days vs a calculated cutoff period (based on video_minutes or some other metric)
+```
