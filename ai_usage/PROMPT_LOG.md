@@ -268,3 +268,11 @@ the exclusions should only be permit_passed, permit_failed, withdrawn; not start
 ```
 passed means status = permit_passed; stopped means status is either not_started, inactive, course_complete, permit_scheduled, or in_progress; end means status = withdrawn or permit failed;
 ```
+
+## P-033
+- **Phase:** not specified
+- **Time:** 2026-09-17 05:15:30
+- **Prompt:**
+```
+lets take a look at withdrawn, permit failed, and not started. any trends to note?
+```
