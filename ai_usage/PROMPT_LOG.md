@@ -244,3 +244,11 @@ lets define stopped as any step prior to permit received. for this analysis, let
 ```
 Lets look at coach-calls/study-hall/group-chat "support" story. explain why we can't say it causes finishing. What could be another reason for the difference?
 ```
+
+## P-030
+- **Phase:** not specified
+- **Time:** 2026-09-17 05:03:32
+- **Prompt:**
+```
+please provide where / how you got the numerators and denominators for the controlled time table
+```
