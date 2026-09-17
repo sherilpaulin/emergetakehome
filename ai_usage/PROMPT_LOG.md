@@ -156,3 +156,11 @@ Phase 9: Funnel analysis. Using analysis/clean/student_table.csv and the funnel 
 ```
 I agree with having per-step cutoffs. What are the pros / cons of using a generic 7 days vs a calculated cutoff period (based on video_minutes or some other metric)
 ```
+
+## P-018
+- **Phase:** not specified
+- **Time:** 2026-09-17 04:16:22
+- **Prompt:**
+```
+what would the funnel look like with p90 calculated cutoffs
+```

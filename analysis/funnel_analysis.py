@@ -62,6 +62,46 @@ def time_to_stage_percentiles(t):
     }
 
 
+def funnel_with_recency_cutoff(df, cutoff_days):
+    """Step-to-step funnel where each step's denominator is restricted to
+    students who signed up at least that step's cutoff (days before the
+    snapshot) -- old enough to have had a fair shot at reaching it, per
+    the p90 signup-to-stage times. Numerator/denominator both come from
+    that restricted, eligible population -- never the full CA."""
+    days_since_signup = (SNAPSHOT - df["signup_at"]).dt.total_seconds() / 86400
+
+    fv_eligible = df[days_since_signup >= cutoff_days["fv"]]
+    cc_eligible = df[(days_since_signup >= cutoff_days["cc"]) & df["first_video_clean"]]
+    permit_eligible = df[(days_since_signup >= cutoff_days["permit"]) & df["course_complete_clean"]]
+
+    return {
+        "CA_total": len(df),
+        "FV_eligible": len(fv_eligible),
+        "FV_excluded_too_new": len(df) - len(fv_eligible),
+        "FV": int(fv_eligible["first_video_clean"].sum()),
+        "FV_step_pct": 100 * fv_eligible["first_video_clean"].sum() / len(fv_eligible) if len(fv_eligible) else None,
+        "CC_eligible": len(cc_eligible),
+        "CC_excluded_too_new": int(df["first_video_clean"].sum()) - len(cc_eligible),
+        "CC": int(cc_eligible["course_complete_clean"].sum()),
+        "CC_step_pct": 100 * cc_eligible["course_complete_clean"].sum() / len(cc_eligible) if len(cc_eligible) else None,
+        "Permit_eligible": len(permit_eligible),
+        "Permit_excluded_too_new": int(df["course_complete_clean"].sum()) - len(permit_eligible),
+        "Permit": int((permit_eligible["permit_result"] == "passed").sum()),
+        "Permit_step_pct": 100 * (permit_eligible["permit_result"] == "passed").sum() / len(permit_eligible)
+        if len(permit_eligible) else None,
+    }
+
+
+def print_adjusted_funnel(label, f):
+    print(f"-- {label} --")
+    print(f"  FV:     {f['FV']:,} of {f['FV_eligible']:,} eligible  ({f['FV_step_pct']:.1f}%)  "
+          f"-- {f['FV_excluded_too_new']:,} excluded as too new")
+    print(f"  CC:     {f['CC']:,} of {f['CC_eligible']:,} eligible  ({f['CC_step_pct']:.1f}%)  "
+          f"-- {f['CC_excluded_too_new']:,} excluded as too new")
+    print(f"  Permit: {f['Permit']:,} of {f['Permit_eligible']:,} eligible  ({f['Permit_step_pct']:.1f}%)  "
+          f"-- {f['Permit_excluded_too_new']:,} excluded as too new")
+
+
 def main():
     t = load()
 
@@ -86,6 +126,17 @@ def main():
     days_since_signup = (SNAPSHOT - t["signup_at"]).dt.total_seconds() / 86400
     for window in (7, 14, 30, 60, 90):
         print(f"  signed up within last {window} days: {(days_since_signup <= window).sum():,}")
+
+    cutoff_days = {"fv": 7, "cc": 55, "permit": 78}  # rounded p90s above
+    print()
+    print("=" * 70)
+    print(f"ADJUSTED FUNNEL (per-step recency cutoffs: {cutoff_days})")
+    print("=" * 70)
+    print_adjusted_funnel("Overall", funnel_with_recency_cutoff(t, cutoff_days))
+    print()
+    for city, g in t.groupby("city"):
+        print_adjusted_funnel(city, funnel_with_recency_cutoff(g, cutoff_days))
+        print()
 
 
 if __name__ == "__main__":
