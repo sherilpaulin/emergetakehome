@@ -308,3 +308,11 @@ yes please add the two questions. next lets look at boston. using fields availab
 ```
 Referral-source mix within Boston
 ```
+
+## P-038
+- **Phase:** not specified
+- **Time:** 2026-09-17 05:31:59
+- **Prompt:**
+```
+okay lets look at lesson details (what module), lesson performance, and support (group chat, study hall, coach calls), and demographics
+```
