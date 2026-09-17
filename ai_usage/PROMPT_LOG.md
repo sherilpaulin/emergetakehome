@@ -105,3 +105,23 @@ continuing on the data cleaning phase 7, Now build two tables from the cleaned f
 ```
 as part of data_noted.md, can you create a data dictionary for the newly created cleaned student_table and lesson_table. for any new metrics we define going forward, make sure to track in data_notes
 ```
+
+## P-014
+- **Phase:** Phase 8
+- **Time:** 2026-09-17 04:02:14
+- **Prompt:**
+```
+Phase 8: Tests. Write about 20 tests for student_table and lesson_table.
+Save them in analysis/tests/test_clean_tables.py. Don't run them yet.
+
+Check these things:
+1. Rows: one row per student, no duplicate student-lesson pairs, row counts match DATA_NOTES.md.
+2. Values: lessons are 1-21, quiz scores are 0-100, no negative minutes, only allowed cities and statuses.
+3. Dates: nothing after the snapshot or before signup, no negative "days since" numbers.
+4. Tables match: every student in lesson_table exists in student_table, and lesson counts agree.
+5. Edge cases: students with zero lessons, students who finished all 21, withdrawn students, test accounts.
+6. Outliers: very long breaks or very high minutes. Note as a flag instead of failing test.
+
+Tests should only read files, never change them. Add a one-line short but descriptive comment to each test detailing the purpose of the test.
+Show me the list of tests and wait for my OK.
+```
