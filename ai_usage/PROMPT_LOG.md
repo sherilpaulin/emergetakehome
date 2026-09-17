@@ -188,3 +188,11 @@ pros and cons of using mean or median as cutoff rather than p90
 ```
 lets use p90 as the funnel as part of the analysis. please create a new file in analysis where we start to track insights from our various analyses. Then i will note the next analysis to conduct
 ```
+
+## P-023
+- **Phase:** not specified
+- **Time:** 2026-09-17 04:31:50
+- **Prompt:**
+```
+ignore the last prompt (phase 10: cutoff points) and remove it from the prompt log. Now we will drill down into the funnel analysis, based on your initial insights, lets drill into steps that are taking longer or where we lose the most students
+```

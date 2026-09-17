@@ -29,3 +29,15 @@ Median time from Course Complete to Permit passed is 17.1 days (p90: 33.6 days) 
 ## I-007: Step durations are all right-skewed
 
 At every step, mean > median (e.g. First Video→Course Complete: mean 36.0 days vs. median 34.3 days; Course Complete→Permit: mean 19.8 vs. median 17.1). A slower minority stretches the average -- median is the more representative "typical" number, mean tells you where the tail pulls it. **Source:** `analysis/funnel_analysis.py` step duration stats.
+
+## I-008: FV→CC drop-off is concentrated in the first 4 lessons (~2 hours of video)
+
+Of 1,500 students who reached First Video and have had 55+ days (p90) to finish, 880 (58.7%) still haven't. Of those 880, 742 (84.3%) stalled within lessons 1-4 (Welcome & How the CLP Works, Inspecting Your Vehicle, Basic Control & Shifting, Seeing/Communicating/Speed Management) -- 8+32+44+41 = 125 minutes of video total. Lesson 3 (Basic Control & Shifting, 44 min) is the single most common stopping point (216 students), more than lesson 1 itself. The problem is front-loaded, not spread across the 21-lesson curriculum. **Source:** `analysis/funnel_dropoff.py`.
+
+## I-009: 853 of the 880 stalled FV→CC students are simply inactive, not withdrawn
+
+Only 18 formally withdrew and 9 are still `in_progress`. The other 853 are `inactive` -- they haven't quit on paper, they've just stopped. That's a re-engagement opportunity, not a lost cohort. **Source:** `analysis/funnel_dropoff.py`.
+
+## I-010: The CC→Permit gap is an access/follow-through problem, not exam failure
+
+Of 537 course-completers who've had 78+ days (p90) to sit the exam, 302 (56.2%) haven't passed. Of those, 257 (85.1%) never even scheduled an exam; only 42 (13.9%) took it and failed; 3 are pending. **Correlational flag (CLAUDE.md rule 7):** of the 257 who never scheduled, 170 (66%) either said "no"/"unsure" on `plan_has_transport_to_dmv` or never filled out a plan at all -- self-reported and self-selected, not proof of cause. 87 said "yes" to transport and still never scheduled, so transport access explains at most part of the gap. **Source:** `analysis/funnel_dropoff.py`.

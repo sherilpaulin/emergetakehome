@@ -81,3 +81,11 @@ Interactive moments in this session where the user corrected, pushed back on, ma
 - **What you said:** "lets use p90 as the funnel as part of the analysis."
 - **Why:** p90 excludes only the slowest ~10% of legitimate finishers from each step's denominator; mean and especially median were rejected because a median cutoff by definition still counts roughly half of eventual finishers as "too early to judge," undermining the fairness goal.
 - **What changed:** `analysis/funnel_analysis.py`'s `main()` reordered so the p90-adjusted funnel prints first as "OFFICIAL FUNNEL," with the raw funnel demoted to a labeled reference section. `analysis/DATA_NOTES.md` Assumptions section records the decision and why mean/median were rejected.
+
+## S-011
+- **Phase:** Phase 10 (retracted) / redirected to funnel drill-down
+- **Type:** pushback
+- **What I did:** Nothing yet -- the Phase 10 "Cutoff points" prompt (lesson-level drop-off, timing between lessons, break/return likelihood) was interrupted by the user before I acted on it.
+- **What you said:** "ignore the last prompt (phase 10: cutoff points) and remove it from the prompt log... lets drill into steps that are taking longer or where we lose the most students" -- explicitly asked to redact the retracted prompt from `ai_usage/PROMPT_LOG.md`, not just move on from it.
+- **Why:** Not stated -- read as: redirect the analysis to build on the I-001..I-007 insights already logged (biggest funnel drop and slowest step) rather than jumping to a new, separately-scoped lesson-level cutoff analysis.
+- **What changed:** Deleted the `## P-022` entry from `PROMPT_LOG.md` (the numbering now jumps P-021 -> P-023, intentionally, documented here). No file from the retracted Phase 10 request was created. Proceeding instead with a drill-down into the funnel steps already identified as slow/lossy (I-002 FV->CC drop, I-006 CC->Permit lag).
