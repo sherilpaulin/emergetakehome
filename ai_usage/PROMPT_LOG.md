@@ -316,3 +316,11 @@ Referral-source mix within Boston
 ```
 okay lets look at lesson details (what module), lesson performance, and support (group chat, study hall, coach calls), and demographics
 ```
+
+## P-039
+- **Phase:** not specified
+- **Time:** 2026-09-17 05:34:56
+- **Prompt:**
+```
+can you run a similar analysis for sacramento and nyc
+```
