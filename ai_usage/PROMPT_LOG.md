@@ -73,3 +73,19 @@ Phase 6: Data Issues. Using the data dictionary and CLAUDE.md, previous analysis
 ```
 Phase 7: Data Cleaning. Write analysis/clean_data.py that applies the choices we made. Save cleaned copies of the four data files in analysis/clean/ (never change or edit data/). Record every problem, choice, and row count in DATA_NOTES.md if not done so already. Run the script and then show me DATA_NOTES.md.
 ```
+
+## P-010
+- **Phase:** not specified
+- **Time:** 2026-09-17 03:19:00
+- **Prompt:**
+```
+Show me the exact code and the result for counting test accounts and the removals made, so I can check the number myself.
+```
+
+## P-011
+- **Phase:** not specified
+- **Time:** 2026-09-17 03:20:14
+- **Prompt:**
+```
+Try again
+```
