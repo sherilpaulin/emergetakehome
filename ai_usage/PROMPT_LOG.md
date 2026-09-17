@@ -35,7 +35,7 @@ Phase 4: Data notes. Create analysis/DATA_NOTES.md and a skill in .claude/skills
 ```
 
 ## P-005
-- **Phase:** not specified
+- **Phase:** Phase 4
 - **Time:** 2026-09-17 02:47:41
 - **Prompt:**
 ```
@@ -43,7 +43,7 @@ create the data_notes.md but do not add any entries yet
 ```
 
 ## P-006
-- **Phase:** not specified
+- **Phase:** Phase 4
 - **Time:** 2026-09-17 02:48:29
 - **Prompt:**
 ```
@@ -75,7 +75,7 @@ Phase 7: Data Cleaning. Write analysis/clean_data.py that applies the choices we
 ```
 
 ## P-010
-- **Phase:** not specified
+- **Phase:** Phase 7
 - **Time:** 2026-09-17 03:19:00
 - **Prompt:**
 ```
@@ -83,7 +83,7 @@ Show me the exact code and the result for counting test accounts and the removal
 ```
 
 ## P-011
-- **Phase:** not specified
+- **Phase:** Phase 7
 - **Time:** 2026-09-17 03:20:14
 - **Prompt:**
 ```
@@ -91,7 +91,7 @@ Try again
 ```
 
 ## P-012
-- **Phase:** not specified
+- **Phase:** Phase 7
 - **Time:** 2026-09-17 03:33:10
 - **Prompt:**
 ```
@@ -99,9 +99,300 @@ continuing on the data cleaning phase 7, Now build two tables from the cleaned f
 ```
 
 ## P-013
-- **Phase:** not specified
+- **Phase:** Phase 7
 - **Time:** 2026-09-17 03:46:04
 - **Prompt:**
 ```
 as part of data_noted.md, can you create a data dictionary for the newly created cleaned student_table and lesson_table. for any new metrics we define going forward, make sure to track in data_notes
+```
+
+## P-014
+- **Phase:** Phase 8
+- **Time:** 2026-09-17 04:02:14
+- **Prompt:**
+```
+Phase 8: Tests. Write about 20 tests for student_table and lesson_table.
+Save them in analysis/tests/test_clean_tables.py. Don't run them yet.
+
+Check these things:
+1. Rows: one row per student, no duplicate student-lesson pairs, row counts match DATA_NOTES.md.
+2. Values: lessons are 1-21, quiz scores are 0-100, no negative minutes, only allowed cities and statuses.
+3. Dates: nothing after the snapshot or before signup, no negative "days since" numbers.
+4. Tables match: every student in lesson_table exists in student_table, and lesson counts agree.
+5. Edge cases: students with zero lessons, students who finished all 21, withdrawn students, test accounts.
+6. Outliers: very long breaks or very high minutes. Note as a flag instead of failing test.
+
+Tests should only read files, never change them. Add a one-line short but descriptive comment to each test detailing the purpose of the test.
+Show me the list of tests and wait for my OK.
+```
+
+## P-015
+- **Phase:** Phase 8
+- **Time:** 2026-09-17 04:06:00
+- **Prompt:**
+```
+Run the 22 tests and tell me:
+1. How many passed, failed, and gave flags.
+2. For each failure: what went wrong, a few example user ids, and whether it's a data problem or a code bug.
+
+Don't fix anything yet. Go through failures with me one at a time with suggested paths forward.
+After I decide, fix code bugs and rerun, or add data problems to DATA_NOTES.md.
+Don't change a test just to make it pass.
+When done, save a short summary in analysis/tests/TEST_RESULTS.md.
+```
+
+## P-016
+- **Phase:** Phase 9
+- **Time:** 2026-09-17 04:08:07
+- **Prompt:**
+```
+Phase 9: Funnel analysis. Using analysis/clean/student_table.csv and the funnel definitions in CLAUDE.md, show me how many students reach each step: signed up → first video → finished course → passed permit. Show it for all students and for each city and for each step, show the count and the percent.  Note that you expect recent signups haven't had time to finish. Suggest a fair way to handle that, explain it simply, and wait for my OK before using it. Also note that this piece is focused on the funnel analysis and should not go beyond that scope yet
+```
+
+## P-017
+- **Phase:** Phase 9
+- **Time:** 2026-09-17 04:14:28
+- **Prompt:**
+```
+I agree with having per-step cutoffs. What are the pros / cons of using a generic 7 days vs a calculated cutoff period (based on video_minutes or some other metric)
+```
+
+## P-018
+- **Phase:** Phase 9
+- **Time:** 2026-09-17 04:16:22
+- **Prompt:**
+```
+what would the funnel look like with p90 calculated cutoffs
+```
+
+## P-019
+- **Phase:** Phase 9
+- **Time:** 2026-09-17 04:18:45
+- **Prompt:**
+```
+can you provide the mean, median, range, p90, p95 for each funnel step
+```
+
+## P-020
+- **Phase:** Phase 9
+- **Time:** 2026-09-17 04:25:08
+- **Prompt:**
+```
+pros and cons of using mean or median as cutoff rather than p90
+```
+
+## P-021
+- **Phase:** Phase 9
+- **Time:** 2026-09-17 04:27:24
+- **Prompt:**
+```
+lets use p90 as the funnel as part of the analysis. please create a new file in analysis where we start to track insights from our various analyses. Then i will note the next analysis to conduct
+```
+
+## P-023
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 04:31:50
+- **Prompt:**
+```
+ignore the last prompt (phase 10: cutoff points) and remove it from the prompt log. Now we will drill down into the funnel analysis, based on your initial insights, lets drill into steps that are taking longer or where we lose the most students
+```
+
+## P-024
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 04:36:06
+- **Prompt:**
+```
+lets drill into the lesson three stall point first
+```
+
+## P-025
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 04:38:45
+- **Prompt:**
+```
+how long do students usually take between lessons, and if a student takes a long break, how likely are they to come back?
+```
+
+## P-026
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 04:45:46
+- **Prompt:**
+```
+can we look into the "status" of these students. should there be a prioritization for example for the "inactive" students who are so close to finishing?
+```
+
+## P-027
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 04:49:48
+- **Prompt:**
+```
+lets add to insights for now.  Using student_table.csv, compare students who finished the course with students who stopped. List the fields we could compare (things like training plan, group chat, study hall, coach calls, device, language, age, city, how fast they started, the new metrics like rewatch ratio that was calculated in students_table). For each one, tell me in one line why it might matter and i'll choose which ones to dive deeper on.
+```
+
+## P-028
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 04:55:49
+- **Prompt:**
+```
+lets define stopped as any step prior to permit received. for this analysis, lets filter out status = permit failed or withdrawn as those are end points. I want to compare permit passed against the other status (minus the two i mentioned)
+```
+
+## P-029
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 05:00:09
+- **Prompt:**
+```
+Lets look at coach-calls/study-hall/group-chat "support" story. explain why we can't say it causes finishing. What could be another reason for the difference?
+```
+
+## P-030
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 05:03:32
+- **Prompt:**
+```
+please provide where / how you got the numerators and denominators for the controlled time table
+```
+
+## P-031
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 05:06:43
+- **Prompt:**
+```
+the exclusions should only be permit_passed, permit_failed, withdrawn; not started stays as part of the "stopped" funnel
+```
+
+## P-032
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 05:12:08
+- **Prompt:**
+```
+passed means status = permit_passed; stopped means status is either not_started, inactive, course_complete, permit_scheduled, or in_progress; end means status = withdrawn or permit failed;
+```
+
+## P-033
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 05:15:30
+- **Prompt:**
+```
+lets take a look at withdrawn, permit failed, and not started. any trends to note?
+```
+
+## P-034
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 05:20:28
+- **Prompt:**
+```
+can you provide a breakdown by referral sources, are some of them not as effective  (maybe in terms of converting from login created to permit passed)
+```
+
+## P-035
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 05:23:29
+- **Prompt:**
+```
+what are some reasons for the observations in paid_social, reentry_org, and workforce_center
+```
+
+## P-036
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 05:27:17
+- **Prompt:**
+```
+yes please add the two questions. next lets look at boston. using fields available in the cleaned datasets, can you list out the observations we have made so far, and suggestions for drill downs
+```
+
+## P-037
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 05:29:39
+- **Prompt:**
+```
+Referral-source mix within Boston
+```
+
+## P-038
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 05:31:59
+- **Prompt:**
+```
+okay lets look at lesson details (what module), lesson performance, and support (group chat, study hall, coach calls), and demographics
+```
+
+## P-039
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 05:34:56
+- **Prompt:**
+```
+can you run a similar analysis for sacramento and nyc
+```
+
+## P-040
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 05:37:19
+- **Prompt:**
+```
+Do you have suggestions for any other analyses, deep dives, segmentations etc. to review for our funnel analysis
+```
+
+## P-041
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 05:39:00
+- **Prompt:**
+```
+start with three segment analysis
+```
+
+## P-042
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 05:41:27
+- **Prompt:**
+```
+let's run behavior over content next
+```
+
+## P-043
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 05:45:21
+- **Prompt:**
+```
+please edit the group chat + study hall finding to reflect that more motivated students might be pursuing those options and causing some skew in the data. let's look at exam-scheduling lead time vs pass rate
+```
+
+## P-044
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 05:47:27
+- **Prompt:**
+```
+lets do both
+```
+
+## P-045
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 05:53:01
+- **Prompt:**
+```
+From the insights we have gathered so far, please write a short summary in INSIGHTS.md, in 5-7 points. Each point has one sentence and the number or data point behind it. Mark which points are strong evidence and which are just patterns that could have other explanations. These should be actionable insights, that have the most likelihood of being incorporated into a community plan.
+```
+
+## P-046
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 05:56:00
+- **Prompt:**
+```
+Please also add keeping up with study plans insight (maybe pattern), transport to dmw, access to laptops / tablets, and study hall (maybe pattern)
+```
+
+## P-047
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 05:59:25
+- **Prompt:**
+```
+Log check: compare the work we have done so far with PROMPT_LOG.md with STEERING_LOG.md. List any correction, pushback, decision, or answered question that isn't logged in steering log, and ALL prompts submitted so far into PROMPT_LOG.md. The phase to include in prompt log will always be the last referenced "Phase: N". Please show me the updates before making them
+```
+
+## P-048
+- **Phase:** Phase 10: Deep-Dive Analysis
+- **Time:** 2026-09-17 06:05:38
+- **Prompt:**
+```
+lets call P-023 to P-047 as phase 10: Deep-Dive Analysis; full backfill
 ```

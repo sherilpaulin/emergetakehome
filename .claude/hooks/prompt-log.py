@@ -21,8 +21,10 @@ PROMPT_LOG_HEADER = (
     "Every prompt sent in this session, logged automatically by "
     "`.claude/hooks/prompt-log.py` (a UserPromptSubmit hook). Numbered "
     "P-001, P-002, ... in send order. Phase is parsed from a leading "
-    "`Phase N:` in the prompt text; prompts sent before this hook existed "
-    "(P-001, P-002) were backfilled by hand in the same format.\n"
+    "`Phase N:` in the prompt text; when a prompt doesn't declare one, "
+    "the last recorded phase carries forward rather than showing 'not "
+    "specified'. Prompts sent before this hook existed (P-001, P-002) "
+    "were backfilled by hand in the same format.\n"
 )
 
 TRIGGER_PATTERNS = [
@@ -47,9 +49,12 @@ def next_id(existing_text):
     return (max(ids) + 1) if ids else 1
 
 
-def phase_label(prompt):
+def phase_label(prompt, existing_text):
     m = re.match(r"\s*Phase\s+(\d+)\s*:", prompt)
-    return f"Phase {m.group(1)}" if m else "not specified"
+    if m:
+        return f"Phase {m.group(1)}"
+    prior = re.findall(r"^- \*\*Phase:\*\* (.+)$", existing_text, re.MULTILINE)
+    return prior[-1] if prior else "not specified"
 
 
 def fence(text):
@@ -83,7 +88,7 @@ def main():
 
     entry = (
         f"\n## {pid}\n"
-        f"- **Phase:** {phase_label(prompt)}\n"
+        f"- **Phase:** {phase_label(prompt, existing)}\n"
         f"- **Time:** {timestamp}\n"
         f"- **Prompt:**\n"
         f"{f_}\n{prompt}\n{f_}\n"
