@@ -190,6 +190,38 @@ def city_composition_decomposition(t, city, cutoff_days=OFFICIAL_CUTOFF_DAYS["pe
     print(f"Gap not explained by referral-source mix: {expected - actual['rate_pct']:.1f} points")
 
 
+def signup_cohort_trend(t):
+    """Is any funnel stage's rate trending up/down by signup month,
+    independent of the recency bias already corrected for elsewhere?
+    Each stage only reports for cohorts old enough to be eligible for
+    it (7/55/78 day p90 cutoffs) -- a cohort with 'n/a' hasn't had
+    enough time yet, not zero performance."""
+    days_since_signup = (SNAPSHOT - t["signup_at"]).dt.total_seconds() / 86400
+    t = t.assign(signup_month=t["signup_at"].dt.to_period("M"), _days=days_since_signup)
+
+    def rate(df, stage, cutoff):
+        eligible = df[df["_days"] >= cutoff]
+        if stage == "fv":
+            num = eligible["first_video_clean"].sum()
+        elif stage == "cc":
+            eligible = eligible[eligible["first_video_clean"]]
+            num = eligible["course_complete_clean"].sum()
+        else:
+            eligible = eligible[eligible["course_complete_clean"]]
+            num = (eligible["permit_result"] == "passed").sum()
+        n = len(eligible)
+        return n, int(num), 100 * num / n if n else None
+
+    for month, g in t.groupby("signup_month"):
+        fv_n, fv_p, fv_r = rate(g, "fv", OFFICIAL_CUTOFF_DAYS["fv"])
+        cc_n, cc_p, cc_r = rate(g, "cc", OFFICIAL_CUTOFF_DAYS["cc"])
+        pm_n, pm_p, pm_r = rate(g, "permit", OFFICIAL_CUTOFF_DAYS["permit"])
+        fv_s = f"{fv_r:.1f}% ({fv_p}/{fv_n})" if fv_r is not None else "n/a (too new)"
+        cc_s = f"{cc_r:.1f}% ({cc_p}/{cc_n})" if cc_r is not None else "n/a (too new)"
+        pm_s = f"{pm_r:.1f}% ({pm_p}/{pm_n})" if pm_r is not None else "n/a (too new)"
+        print(f"  {month}: signups={len(g):,}  FV={fv_s}  CC={cc_s}  Permit={pm_s}")
+
+
 def main():
     t = load()
 
@@ -273,9 +305,17 @@ def main():
         print()
 
     print("=" * 70)
-    print("BOSTON: how much of the gap is referral-source composition vs. Boston-specific?")
+    print("COMPOSITION DECOMPOSITION: how much of each city's gap is referral-source mix vs. city-specific?")
     print("=" * 70)
-    city_composition_decomposition(t, "Boston")
+    for city in ("Boston", "NYC", "Sacramento"):
+        print(f"-- {city} --")
+        city_composition_decomposition(t, city)
+        print()
+
+    print("=" * 70)
+    print("SIGNUP-COHORT TREND (by month, each stage only reported once eligible)")
+    print("=" * 70)
+    signup_cohort_trend(t)
 
 
 if __name__ == "__main__":

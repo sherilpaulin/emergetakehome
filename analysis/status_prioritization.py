@@ -68,6 +68,27 @@ def main():
     print(f"not_started: {len(not_started):,} ({100 * len(not_started) / len(t):.1f}% of all students) "
           f"-- never completed lesson 1 at all, out of scope for this drill-down")
 
+    print()
+    print("=" * 70)
+    print("'CLOSE TO CONVERTING': lesson-proximity tiers x behavioral signal, all stopped statuses")
+    print("=" * 70)
+    print("Signal = study_hall > 0, OR coach_calls >= 2, OR met/exceeded own week-1 pace target.")
+    print("CAVEAT: study_hall/coach_calls are cumulative counts, so students further along have had")
+    print("more chances to accumulate them (same tenure confound as I-017) -- this inflates P1's rate")
+    print("relative to P2/P3. Use for within-tier prioritization, not to compare tiers to each other.")
+    print()
+    stopped = t[~t["status"].isin(["permit_passed", "permit_failed", "withdrawn"])]
+    started = stopped[stopped["lessons_done_count"] >= 1].copy()
+    started["high_signal"] = (
+        (started["study_hall_sessions_attended"] > 0)
+        | (started["coach_calls_completed"] >= 2)
+        | (started["lessons_first_7_days"] >= started["plan_lessons_per_week"].fillna(999))
+    )
+    for label, modules in PRIORITY_TIERS.items():
+        tier = started[started["stopped_module"].isin(modules)]
+        hs = int(tier["high_signal"].sum())
+        print(f"  {label}: n={len(tier):,}  high_signal={hs:,} ({100 * hs / len(tier):.1f}%)")
+
 
 if __name__ == "__main__":
     main()

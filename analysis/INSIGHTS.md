@@ -116,6 +116,18 @@ Joining group chat without attending study hall barely moves the needle: 10.0% e
 
 Across all 326 students who took the exam, mean/median lead time (Course Complete to exam date) is nearly identical for passed (19.8/17.1 days) and failed (20.6/19.1 days). Pass rate by lead-time bucket bounces between 78.9% and 90.0% with no trend across 0-7d, 7-14d, 14-21d, 21-30d, 30-45d buckets. Booking sooner doesn't help, booking later doesn't hurt. Confirms and extends I-020 (which only looked at the failed group) to the full population who took the exam. **Source:** `analysis/exam_lead_time.py`.
 
+## I-031: Signup-cohort rates are mostly flat, with one tentative recent FV dip
+
+CC and Permit rates show no systematic trend by signup month (CC: 37.0-44.3%, Permit: 36.8-46.7%, March-July, each stage only reported for cohorts old enough to be p90-eligible). FV rate is stable ~67-68% through July, then dips to 64.5% (August) and 56.6% (September). **Flagged as tentative, not confirmed:** September's cohort (n=113 eligible) is barely past the 7-day cutoff, so some residual recency noise is possible even after the p90 correction. Worth rechecking once September fully matures. **Source:** `analysis/funnel_analysis.py`.
+
+## I-032: Sacramento overperforms its own referral sources' national rates -- the mirror image of Boston
+
+Extending I-022's composition decomposition to all 3 cities: NYC's gap not explained by referral mix is -0.8 points (essentially fully explained by composition -- NYC is the neutral baseline). Sacramento's is **+3.8 points** (16.2% actual vs. 12.5% composition-expected) -- every one of Sacramento's referral sources converts above its own national rate (e.g., `parole_probation_officer` 21.2% in Sacramento vs. 13.3% nationally). Boston's -4.6 points (I-022) is now bracketed by a clear positive counterpart, strengthening the case that city itself has a real effect in both directions, not just noise in one small sample. Worth understanding what Sacramento does differently and whether it's replicable. **Source:** `analysis/funnel_analysis.py`.
+
+## I-033: A "close to converting" segment exists within every lesson-proximity tier, with a confound to watch
+
+Combining I-013's lesson-proximity tiers with a behavioral signal (study hall attendance, 2+ coach calls, or meeting one's own week-1 pace target per I-027) among all "stopped" students with 1+ lessons: P1 (closest to Course Complete) shows 79.4% high-signal (112 of 141), vs. 38.9% (P2, General Knowledge) and 36.5% (P3, Orientation only). **Self-flagged caveat:** study hall/coach calls are cumulative counts, so P1 students have simply had more time to accumulate them -- the same tenure confound as I-017. Don't read this as "P1 students are more motivated than P2/P3." Useful *within* a tier (the ~37-39% of P2/P3 already showing a signal are the better outreach targets in those tiers), not for ranking tiers against each other. **Source:** `analysis/status_prioritization.py`.
+
 ## I-018: `not_started` students abandon within about a day of signing up, and `paid_social` leads are overrepresented
 
 Of 968 `not_started` students (32.3% of all), the median gap between signup and their last app activity is 1.0 day, and 938 of 968 (96.9%) show zero app activity in the week before the snapshot -- this is an immediate-abandonment pattern, not a slow start. `paid_social` referrals are overrepresented (36.6% vs 27.9% overall) and `reentry_org` underrepresented (20.7% vs 25.9%) relative to the full population. **Correlational flag (CLAUDE.md rule 7):** referral source isn't chosen mid-journey, but the acquisition channel itself may bring in lower-intent leads. **Source:** `analysis/status_deep_dive.py`.

@@ -356,3 +356,11 @@ let's run behavior over content next
 ```
 please edit the group chat + study hall finding to reflect that more motivated students might be pursuing those options and causing some skew in the data. let's look at exam-scheduling lead time vs pass rate
 ```
+
+## P-044
+- **Phase:** not specified
+- **Time:** 2026-09-17 05:47:27
+- **Prompt:**
+```
+lets do both
+```
