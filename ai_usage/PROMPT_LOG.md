@@ -212,3 +212,11 @@ lets drill into the lesson three stall point first
 ```
 how long do students usually take between lessons, and if a student takes a long break, how likely are they to come back?
 ```
+
+## P-026
+- **Phase:** not specified
+- **Time:** 2026-09-17 04:45:46
+- **Prompt:**
+```
+can we look into the "status" of these students. should there be a prioritization for example for the "inactive" students who are so close to finishing?
+```
