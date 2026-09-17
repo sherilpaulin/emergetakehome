@@ -49,3 +49,11 @@ create the data_notes.md but do not add any entries yet
 ```
 yes create the data-notes skill as well
 ```
+
+## P-007
+- **Phase:** Phase 5
+- **Time:** 2026-09-17 02:52:36
+- **Prompt:**
+```
+Phase 5: Data exploration. Write analysis/data_explore.py. For each data file, it should show: how many rows, the columns, how many blanks each column has, the different values in text columns, and the smallest and largest dates and numbers, any other unique features. Run it and then tell me in plain words: what looks normal, what looks strange, and what you want to check more closely. Don't fix anything yet or ask me to make decisions yet, as we will do that in the next step.
+```
