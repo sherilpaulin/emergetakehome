@@ -33,3 +33,11 @@ Phase 3: Safety. CLAUDE.md says we can't change files in data/, can't send messa
 ```
 Phase 4: Data notes. Create analysis/DATA_NOTES.md and a skill in .claude/skills/data-notes/ that explains how to fill it in. The file should have four parts: 1. Problems found: a table with an ID, which file, what's wrong, how many rows, and what we did about it. 2. Row counts: how many rows each file had before and after cleaning. 3. Assumptions: guesses we had to make, and why. 4. Questions for Emerge: things only Gabe can answer, and what we'll assume until we meet. Keep it simple and easy to read. Show me an example entry for each part before creating any new files.
 ```
+
+## P-005
+- **Phase:** not specified
+- **Time:** 2026-09-17 02:47:41
+- **Prompt:**
+```
+create the data_notes.md but do not add any entries yet
+```
