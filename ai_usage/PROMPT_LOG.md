@@ -204,3 +204,11 @@ ignore the last prompt (phase 10: cutoff points) and remove it from the prompt l
 ```
 lets drill into the lesson three stall point first
 ```
+
+## P-025
+- **Phase:** not specified
+- **Time:** 2026-09-17 04:38:45
+- **Prompt:**
+```
+how long do students usually take between lessons, and if a student takes a long break, how likely are they to come back?
+```
