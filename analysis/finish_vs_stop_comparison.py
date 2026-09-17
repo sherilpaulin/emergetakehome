@@ -57,26 +57,25 @@ def compare_numeric(passed, stopped, col):
     print(f"  stopped: n={len(s):,}  mean={s.mean():.2f}  median={s.median():.2f}")
 
 
-def tenure_adjusted_support_rates(t):
+def tenure_adjusted_support_rates(passed, stopped):
     """Coach calls and study hall are CUMULATIVE counts -- a student who
     stayed in the program longer has more chances to rack them up
     regardless of whether either one helps. Tests that confound by
-    excluding never-started students and comparing rate-per-month-in-
-    program, not raw totals."""
-    passed = t[t["status"] == "permit_passed"].copy()
-    stopped_started = t[
-        ~t["status"].isin(["permit_passed", "permit_failed", "withdrawn", "not_started"])
-    ].copy()
-
-    for label, grp in (("passed", passed), ("stopped (excl. never-started)", stopped_started)):
+    comparing rate-per-month-in-program, not raw totals. Uses the same
+    passed/stopped populations as every other comparison in this file
+    (stopped = all statuses except permit_passed/permit_failed/withdrawn,
+    not_started included) -- no additional exclusion here."""
+    for label, grp in (("passed", passed), ("stopped", stopped)):
         months = grp["days_in_program"] / 30
         print(f"-- {label} (n={len(grp):,}) --")
         print(f"  days_in_program: mean={grp['days_in_program'].mean():.1f} "
               f"median={grp['days_in_program'].median():.1f}")
+        coach_rate = grp["coach_calls_completed"] / months
+        hall_rate = grp["study_hall_sessions_attended"] / months
         print(f"  coach_calls_completed: raw mean={grp['coach_calls_completed'].mean():.2f}  "
-              f"per-month mean={(grp['coach_calls_completed'] / months).mean():.3f}")
+              f"per-month mean={coach_rate.mean():.3f}  per-month median={coach_rate.median():.3f}")
         print(f"  study_hall_sessions_attended: raw mean={grp['study_hall_sessions_attended'].mean():.2f}  "
-              f"per-month mean={(grp['study_hall_sessions_attended'] / months).mean():.3f}")
+              f"per-month mean={hall_rate.mean():.3f}  per-month median={hall_rate.median():.3f}")
         print(f"  joined_group_chat: {100 * (grp['joined_group_chat'] == 'yes').mean():.1f}% "
               f"(not a cumulative count -- tenure shouldn't affect this one)")
         print()
@@ -114,7 +113,7 @@ def main():
     print("=" * 70)
     print("TENURE CONFOUND CHECK: is the support gap just 'more time in program'?")
     print("=" * 70)
-    tenure_adjusted_support_rates(t)
+    tenure_adjusted_support_rates(passed, stopped)
 
 
 if __name__ == "__main__":

@@ -252,3 +252,11 @@ Lets look at coach-calls/study-hall/group-chat "support" story. explain why we c
 ```
 please provide where / how you got the numerators and denominators for the controlled time table
 ```
+
+## P-031
+- **Phase:** not specified
+- **Time:** 2026-09-17 05:06:43
+- **Prompt:**
+```
+the exclusions should only be permit_passed, permit_failed, withdrawn; not started stays as part of the "stopped" funnel
+```
