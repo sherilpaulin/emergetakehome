@@ -214,6 +214,35 @@ def main():
         print()
 
     print("=" * 70)
+    print("BY AGE BAND (same p90-adjusted methodology)")
+    print("=" * 70)
+    for band, g in t.groupby("age_band"):
+        print_adjusted_funnel(band, funnel_with_recency_cutoff(g, OFFICIAL_CUTOFF_DAYS))
+        e2e = end_to_end_permit_rate(g)
+        print(f"  End-to-end CA->Permit: {e2e['passed']:,} of {e2e['eligible']:,} eligible "
+              f"(signed up 78+ days ago) = {e2e['rate_pct']:.1f}%")
+        print()
+
+    print("=" * 70)
+    print("BY PRIMARY DEVICE (same p90-adjusted methodology)")
+    print("=" * 70)
+    for device, g in t.groupby("primary_device"):
+        print_adjusted_funnel(device, funnel_with_recency_cutoff(g, OFFICIAL_CUTOFF_DAYS))
+        e2e = end_to_end_permit_rate(g)
+        print(f"  End-to-end CA->Permit: {e2e['passed']:,} of {e2e['eligible']:,} eligible "
+              f"(signed up 78+ days ago) = {e2e['rate_pct']:.1f}%")
+        print()
+
+    print("=" * 70)
+    print("plan_has_transport_to_dmv BY CITY (among students with a training plan)")
+    print("=" * 70)
+    with_plan = t[t["has_training_plan"] == "yes"]
+    for city, g in with_plan.groupby("city"):
+        dist = (g["plan_has_transport_to_dmv"].value_counts(normalize=True) * 100).round(1)
+        print(f"  {city} (n={len(g):,}): {dist.to_dict()}")
+
+    print()
+    print("=" * 70)
     print("FOR REFERENCE: raw funnel, no recency adjustment (understates CC/Permit)")
     print("=" * 70)
     print_funnel("Overall", funnel(t))
