@@ -158,6 +158,38 @@ def end_to_end_permit_rate(df, cutoff_days=OFFICIAL_CUTOFF_DAYS["permit"]):
             "rate_pct": 100 * passed / len(eligible) if len(eligible) else None}
 
 
+def city_composition_decomposition(t, city, cutoff_days=OFFICIAL_CUTOFF_DAYS["permit"]):
+    """How much of a city's end-to-end Permit rate gap is explained by
+    its referral-source mix, vs. something city-specific on top?
+    Compares the city's actual rate to a composition-adjusted expected
+    rate (the city's referral-source mix, applied to each source's
+    NATIONAL rate)."""
+    city_df = t[t["city"] == city]
+    actual = end_to_end_permit_rate(city_df, cutoff_days)
+
+    print(f"{city} actual end-to-end: {actual['passed']} of {actual['eligible']} eligible "
+          f"= {actual['rate_pct']:.1f}%")
+    print()
+    print(f"By referral source (national rate vs. {city}-only, small-n caveat applies):")
+    expected = 0.0
+    for source in sorted(t["referral_source"].unique()):
+        national = end_to_end_permit_rate(t[t["referral_source"] == source], cutoff_days)
+        city_source = city_df[city_df["referral_source"] == source]
+        city_rate = end_to_end_permit_rate(city_source, cutoff_days)
+        share = len(city_source) / len(city_df)
+        expected += share * national["rate_pct"]
+        city_rate_str = f"{city_rate['rate_pct']:.1f}%" if city_rate["rate_pct"] is not None else "n/a"
+        print(f"  {source}: national={national['rate_pct']:.1f}% ({national['passed']}/{national['eligible']})  "
+              f"{city}-only={city_rate_str} ({city_rate['passed']}/{city_rate['eligible']})  "
+              f"{city} share of city population={100 * share:.1f}%")
+
+    print()
+    print(f"Composition-adjusted expected {city} rate (if {city} had each source's NATIONAL rate): "
+          f"{expected:.1f}%")
+    print(f"{city} actual rate: {actual['rate_pct']:.1f}%")
+    print(f"Gap not explained by referral-source mix: {expected - actual['rate_pct']:.1f} points")
+
+
 def main():
     t = load()
 
@@ -210,6 +242,11 @@ def main():
     for step, stats in funnel_step_durations(t).items():
         print_step_duration_stats(step, stats)
         print()
+
+    print("=" * 70)
+    print("BOSTON: how much of the gap is referral-source composition vs. Boston-specific?")
+    print("=" * 70)
+    city_composition_decomposition(t, "Boston")
 
 
 if __name__ == "__main__":

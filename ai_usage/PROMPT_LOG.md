@@ -300,3 +300,11 @@ what are some reasons for the observations in paid_social, reentry_org, and work
 ```
 yes please add the two questions. next lets look at boston. using fields available in the cleaned datasets, can you list out the observations we have made so far, and suggestions for drill downs
 ```
+
+## P-037
+- **Phase:** not specified
+- **Time:** 2026-09-17 05:29:39
+- **Prompt:**
+```
+Referral-source mix within Boston
+```
