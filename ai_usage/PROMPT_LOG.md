@@ -276,3 +276,11 @@ passed means status = permit_passed; stopped means status is either not_started,
 ```
 lets take a look at withdrawn, permit failed, and not started. any trends to note?
 ```
+
+## P-034
+- **Phase:** not specified
+- **Time:** 2026-09-17 05:20:28
+- **Prompt:**
+```
+can you provide a breakdown by referral sources, are some of them not as effective  (maybe in terms of converting from login created to permit passed)
+```

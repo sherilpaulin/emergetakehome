@@ -145,6 +145,19 @@ def print_adjusted_funnel(label, f):
 OFFICIAL_CUTOFF_DAYS = {"fv": 7, "cc": 55, "permit": 78}  # p90 signup-to-stage, locked in Phase 9
 
 
+def end_to_end_permit_rate(df, cutoff_days=OFFICIAL_CUTOFF_DAYS["permit"]):
+    """True signup-to-permit conversion, not step-to-step: of everyone
+    who signed up long enough ago (78+ days, p90) to plausibly have
+    reached Permit by now -- regardless of current progress -- how many
+    actually passed. Denominator is the full eligible CA population,
+    not just those who reached Course Complete."""
+    days_since_signup = (SNAPSHOT - df["signup_at"]).dt.total_seconds() / 86400
+    eligible = df[days_since_signup >= cutoff_days]
+    passed = int((eligible["permit_result"] == "passed").sum())
+    return {"eligible": len(eligible), "passed": passed,
+            "rate_pct": 100 * passed / len(eligible) if len(eligible) else None}
+
+
 def main():
     t = load()
 
@@ -156,6 +169,16 @@ def main():
     print()
     for city, g in t.groupby("city"):
         print_adjusted_funnel(city, funnel_with_recency_cutoff(g, OFFICIAL_CUTOFF_DAYS))
+        print()
+
+    print("=" * 70)
+    print("BY REFERRAL SOURCE (same p90-adjusted methodology)")
+    print("=" * 70)
+    for source, g in t.groupby("referral_source"):
+        print_adjusted_funnel(source, funnel_with_recency_cutoff(g, OFFICIAL_CUTOFF_DAYS))
+        e2e = end_to_end_permit_rate(g)
+        print(f"  End-to-end CA->Permit: {e2e['passed']:,} of {e2e['eligible']:,} eligible "
+              f"(signed up 78+ days ago) = {e2e['rate_pct']:.1f}%")
         print()
 
     print("=" * 70)

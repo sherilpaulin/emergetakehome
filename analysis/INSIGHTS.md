@@ -72,6 +72,12 @@ Coach calls and study hall sessions are cumulative counts, so anyone who stayed 
 
 `joined_group_chat` is unaffected by this adjustment either way: it's a one-time join decision, not a cumulative count, so tenure can't mechanically inflate it (50.7% vs 32.5%). Still correlational (self-selected motivation could drive both joining and finishing) -- but the cleanest of the three support signals, unlike coach calls/study hall which are entangled with time-in-program. **Source:** `analysis/finish_vs_stop_comparison.py`.
 
+## I-021: `paid_social` converts end-to-end at ~60% the rate of every other referral source
+
+True signup-to-permit conversion (p90-eligible, 78+ days since signup): `workforce_center` 15.4% (35/227), `reentry_org` 13.4% (67/500), `parole_probation_officer` 13.3% (44/330), `friend_family` 13.2% (41/311), `paid_social` **9.3% (48/515)**. `paid_social` is the largest channel by eligible volume and the weakest by rate -- real lost volume, not noise. Confirms and quantifies I-018/I-019 (paid_social overrepresented among `not_started` and `withdrawn`).
+
+Step-by-step, sources fail at different points, not just one uniformly "bad" channel: `paid_social` is weakest at FV/CA (55.7% vs. reentry_org's 74.1%) and CC/FV (33.4% vs. reentry_org's 46.0%) -- a lead-quality problem from signup onward. `reentry_org`, despite being best at both those steps, is worst at Permit/CC (39.0%) -- these students finish training but stall right before the exam. `workforce_center` is middling early but best at Permit/CC (54.7%). **Source:** `analysis/funnel_analysis.py`.
+
 ## I-018: `not_started` students abandon within about a day of signing up, and `paid_social` leads are overrepresented
 
 Of 968 `not_started` students (32.3% of all), the median gap between signup and their last app activity is 1.0 day, and 938 of 968 (96.9%) show zero app activity in the week before the snapshot -- this is an immediate-abandonment pattern, not a slow start. `paid_social` referrals are overrepresented (36.6% vs 27.9% overall) and `reentry_org` underrepresented (20.7% vs 25.9%) relative to the full population. **Correlational flag (CLAUDE.md rule 7):** referral source isn't chosen mid-journey, but the acquisition channel itself may bring in lower-intent leads. **Source:** `analysis/status_deep_dive.py`.
