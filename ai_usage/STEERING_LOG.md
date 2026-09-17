@@ -65,3 +65,11 @@ Interactive moments in this session where the user corrected, pushed back on, ma
 - **What you said:** "rewatch_ratio = minutes watched / video minutes, which then gets averaged across all completed lessons" -- i.e. compute the ratio per lesson first, then average the ratios, not average the two quantities first and then divide.
 - **Why:** These are not the same number in general (`mean(a/b) != mean(a)/mean(b)`) -- a student with one very short lesson watched at 3x length and one very long lesson watched exactly on time would show a skewed ratio-of-averages that a lesson-by-lesson average would not.
 - **What changed:** `analysis/build_student_table.py` computes `_ratio = minutes_watched / video_minutes` per row of `lesson_table.csv`, then takes `groupby("user_id")["_ratio"].mean()` -- average of ratios, per the corrected definition.
+
+## S-009
+- **Phase:** Phase 9
+- **Type:** correction (mine -- caught and fixed immediately, not user-driven)
+- **What I did:** Answered the Phase 9 funnel-analysis request by computing counts/percentages with ad-hoc `python3 -c` commands and reporting the numbers directly in chat, without saving a script.
+- **What you said:** N/A -- self-caught before this reached you, while checking `git status` after your stop-hook nudge and noticing no new analysis file existed for numbers I'd already reported.
+- **Why:** CLAUDE.md hard rule 4: "If a number came from a script, the script lives in analysis/ and reruns from scratch." An ad-hoc shell command satisfies neither half of that.
+- **What changed:** Wrote `analysis/funnel_analysis.py`, ran it, and confirmed it reproduces the exact same numbers already given (CA 3,000 / FV 1,998 / CC 696 / Permit 274 overall, plus the 3-city breakdown and the 90th-percentile time-to-stage figures). No numbers changed, just given a reproducible source.

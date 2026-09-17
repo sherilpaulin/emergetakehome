@@ -140,3 +140,11 @@ After I decide, fix code bugs and rerun, or add data problems to DATA_NOTES.md.
 Don't change a test just to make it pass.
 When done, save a short summary in analysis/tests/TEST_RESULTS.md.
 ```
+
+## P-016
+- **Phase:** Phase 9
+- **Time:** 2026-09-17 04:08:07
+- **Prompt:**
+```
+Phase 9: Funnel analysis. Using analysis/clean/student_table.csv and the funnel definitions in CLAUDE.md, show me how many students reach each step: signed up → first video → finished course → passed permit. Show it for all students and for each city and for each step, show the count and the percent.  Note that you expect recent signups haven't had time to finish. Suggest a fair way to handle that, explain it simply, and wait for my OK before using it. Also note that this piece is focused on the funnel analysis and should not go beyond that scope yet
+```
